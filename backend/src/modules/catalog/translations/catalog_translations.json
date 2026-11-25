@@ -152,5 +152,38 @@
         "en": {
             "message": "Language deleted"
         }
+    },
+    "COVER_INVALID": {
+        "ca": {
+            "detail": "La portada ha de ser una imatge PNG, JPEG o WebP de fins a 5 MB"
+        },
+        "es": {
+            "detail": "La portada tiene que ser una imagen PNG, JPEG o WebP de hasta 5 MB"
+        },
+        "en": {
+            "detail": "The cover has to be a PNG, JPEG or WebP image of up to 5 MB"
+        }
+    },
+    "COVER_SAVED": {
+        "ca": {
+            "message": "Portada desada"
+        },
+        "es": {
+            "message": "Portada guardada"
+        },
+        "en": {
+            "message": "Cover saved"
+        }
+    },
+    "COVER_REMOVED": {
+        "ca": {
+            "message": "Portada eliminada"
+        },
+        "es": {
+            "message": "Portada eliminada"
+        },
+        "en": {
+            "message": "Cover removed"
+        }
     }
 }

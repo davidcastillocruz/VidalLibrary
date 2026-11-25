@@ -28,6 +28,8 @@ limiter = Limiter(
 READ_LIMIT = "120/minute;5000/day"
 # Browsing the public catalog without a session: every student of the school (around 1,600) arrives from its one IP
 CATALOG_LIMIT = "600/minute;30000/day"
+# The covers of the catalog, up to 24 with each page, from the same IP: once seen the browser keeps them
+COVER_LIMIT = "1200/minute;60000/day"
 # Signing in and out, again and again in a shared classroom
 SIGN_IN_LIMIT = "60/minute;2000/day"
 # What is done once in a while: a reservation, opening the link of an email, a change in the catalog

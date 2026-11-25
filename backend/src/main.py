@@ -33,9 +33,9 @@ logger = logging.getLogger(__name__)
 # with the same id is below one in a hundred thousand
 REQUEST_ID_BYTES = 12
 
-# Biggest body a request can bring, the same for every route: the JSON of any form fits with room to spare.
-# An app with routes that take files (a photo) raises it to what the biggest one and the rest of its form need
-MAX_BODY_BYTES = 1024 * 1024
+# Biggest body a request can bring, the same for every route: a cover (5 MB, PUT /admin/catalog/items/{id}/cover) and
+# the rest of its form fit
+MAX_BODY_BYTES = 6 * 1024 * 1024
 
 
 # Runs on startup and on shutdown: a broken translation file stops the app before it takes any request
@@ -74,8 +74,8 @@ app.include_router(catalog_admin_router)
 
 
 # Refuses a body over MAX_BODY_BYTES with a 413, by the size it declares or by what has arrived while it's read.
-# FastAPI reads a whole body before the endpoint runs: without it, one request could fill the memory. An HTTPException
-# raised while FastAPI reads goes through, and http_error_handler translates it
+# FastAPI reads a whole form before checking the session and the limits: without it, one upload with no session could
+# fill the disk. An HTTPException raised while FastAPI reads goes through, and http_error_handler translates it
 def limit_body_size(app: ASGIApp) -> ASGIApp:
     # The app with the limit: only an HTTP request has a body
     async def middleware(scope: Scope, receive: Receive, send: Send) -> None:

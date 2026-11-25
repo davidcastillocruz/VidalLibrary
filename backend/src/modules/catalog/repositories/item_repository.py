@@ -45,6 +45,21 @@ async def get_item_by_id(db: AsyncSession, item_id: uuid.UUID) -> Item | None:
     return await db.get(Item, item_id)
 
 
+# The key of the cover of the work, None without one (or without the work).
+# lock: to change it, its row locked until the commit (FOR NO KEY UPDATE): two changes of the cover at once would both
+# remove the same old file and leave the other new one behind
+async def get_cover_key_by_item_id(db: AsyncSession, item_id: uuid.UUID, lock: bool) -> str | None:
+    query = select(Item.cover_key).where(Item.id == item_id)
+    return await db.scalar(query.with_for_update(key_share=True) if lock else query)
+
+
+# Saves the key of the cover in the storage, None when it is removed. False when the work no longer exists (deleted
+# while its new cover was being processed): nothing was saved
+async def set_cover_key(db: AsyncSession, item_id: uuid.UUID, key: str | None) -> bool:
+    query = update(Item).where(Item.id == item_id).values(cover_key=key).returning(Item.id)
+    return bool(await db.scalar(query))
+
+
 # A new work. The flush gives it its id, for its genres
 async def create_item(db: AsyncSession, kind: ItemKind, values: dict[str, Any]) -> Item:
     item = Item(kind=kind, **values)

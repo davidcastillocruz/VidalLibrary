@@ -1,6 +1,6 @@
 import uuid
 
-from fastapi import APIRouter, Request, status
+from fastapi import APIRouter, Request, UploadFile, status
 
 from src.api.dependencies import CurrentLibrarian, Language, get_session_user_id
 from src.core.limiter import OCCASIONAL_LIMIT, limiter
@@ -57,6 +57,33 @@ async def delete_item(
     current: CurrentLibrarian,
 ) -> MessageResponse:
     return await catalog_management_service.delete_item(db, item_id, language)
+
+
+# A new cover of a work, as a file (multipart): PNG, JPEG or WebP
+@router.put("/items/{item_id}/cover")
+@limiter.limit(OCCASIONAL_LIMIT, key_func=get_session_user_id)
+async def update_cover(
+    request: Request,
+    item_id: uuid.UUID,
+    cover: UploadFile,
+    db: DbSession,
+    language: Language,
+    current: CurrentLibrarian,
+) -> MessageResponse:
+    return await catalog_management_service.update_cover(db, item_id, cover, language)
+
+
+# Removes the cover of a work
+@router.delete("/items/{item_id}/cover")
+@limiter.limit(OCCASIONAL_LIMIT, key_func=get_session_user_id)
+async def remove_cover(
+    request: Request,
+    item_id: uuid.UUID,
+    db: DbSession,
+    language: Language,
+    current: CurrentLibrarian,
+) -> MessageResponse:
+    return await catalog_management_service.remove_cover(db, item_id, language)
 
 
 # A new genre of a kind

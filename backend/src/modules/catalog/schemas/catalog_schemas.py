@@ -59,6 +59,8 @@ class ItemSummary(BaseModel):
     creator: str
     year: int | None
     copies: int
+    # The version of its cover, for GET /catalog/items/{id}/cover?v=. None without one: the frontend draws its own
+    cover: str | None
 
 
 # A work on its own page: the card and the rest of what the library knows of it

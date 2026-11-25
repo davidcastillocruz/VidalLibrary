@@ -65,6 +65,12 @@ pnpm-debug.log*
 .oxlintcache
 
 # =========================
+# Files of the app
+# =========================
+# The covers the app keeps on the disk (src/storage/files.py): uploaded by the librarians, never in git
+backend/data/files/
+
+# =========================
 # AI assistants (personal settings and permissions)
 # =========================
 .claude/

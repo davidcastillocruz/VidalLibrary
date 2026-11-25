@@ -1,11 +1,12 @@
 import logging
 import uuid
 
-from fastapi import HTTPException, status
+from fastapi import HTTPException, UploadFile, status
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.core.languages import get_error_detail, get_response
+from src.modules.catalog.cover import cover_files, cover_image
 from src.modules.catalog.repositories import genre_repository, item_repository, language_repository
 from src.modules.catalog.schemas.catalog_schemas import (
     GenreResponse,
@@ -16,6 +17,7 @@ from src.modules.catalog.schemas.catalog_schemas import (
     NameSchema,
 )
 from src.shared.schemas import MessageResponse
+from src.storage import files
 
 logger = logging.getLogger(__name__)
 
@@ -100,15 +102,65 @@ async def update_item(db: AsyncSession, item_id: uuid.UUID, body: ItemSchema, la
     return MessageResponse(**get_response("ITEM_SAVED", language))
 
 
-# Removes a work from the catalog
+# Removes a work from the catalog. The file of its cover goes after the commit, once the database no longer points to it
 async def delete_item(db: AsyncSession, item_id: uuid.UUID, language: str) -> MessageResponse:
-    if not await item_repository.get_item_by_id(db, item_id):
+    item = await item_repository.get_item_by_id(db, item_id)
+    if not item:
         raise _item_not_found(language)
     await item_repository.delete_item(db, item_id)
     await db.commit()
     logger.info("Item deleted", extra={"item_id": item_id})
 
+    if item.cover_key:
+        await cover_files.remove_cover_file(item.cover_key)
     return MessageResponse(**get_response("ITEM_DELETED", language))
+
+
+# A new cover of a work, PNG, JPEG or WebP, kept as WebP:
+# - a new key on every change: the file the database points to is never overwritten
+# - the key is read again with its row locked: two changes at once would remove the same old file
+# - the new file is saved just before the commit, in the same try: it is removed if anything fails, a cancelled
+#   request too (not an Exception). The old one goes after the commit
+async def update_cover(db: AsyncSession, item_id: uuid.UUID, upload: UploadFile, language: str) -> MessageResponse:
+    if not await item_repository.get_item_by_id(db, item_id):
+        raise _item_not_found(language)
+    cover = await cover_image.read_cover(upload)
+    if not cover:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=get_error_detail("COVER_INVALID", language),
+        )
+
+    old_key = await item_repository.get_cover_key_by_item_id(db, item_id, lock=True)
+    new_key = cover_files.new_cover_key(item_id)
+    # Deleted while its cover was being processed: no file is saved for a work that is gone
+    if not await item_repository.set_cover_key(db, item_id, new_key):
+        raise _item_not_found(language)
+    try:
+        await files.save_file(new_key, cover)
+        await db.commit()
+    except BaseException:
+        await cover_files.remove_cover_file(new_key)
+        raise
+    logger.info("Cover changed", extra={"item_id": item_id})
+
+    if old_key:
+        await cover_files.remove_cover_file(old_key)
+    return MessageResponse(**get_response("COVER_SAVED", language))
+
+
+# Removes the cover of a work: the frontend draws its own again. Without one nothing changes. The file goes after the
+# commit, once the database no longer points to it
+async def remove_cover(db: AsyncSession, item_id: uuid.UUID, language: str) -> MessageResponse:
+    if not await item_repository.get_item_by_id(db, item_id):
+        raise _item_not_found(language)
+    old_key = await item_repository.get_cover_key_by_item_id(db, item_id, lock=True)
+    if old_key:
+        await item_repository.set_cover_key(db, item_id, None)
+        await db.commit()
+        logger.info("Cover removed", extra={"item_id": item_id})
+        await cover_files.remove_cover_file(old_key)
+    return MessageResponse(**get_response("COVER_REMOVED", language))
 
 
 # A new genre of a kind. Its name can't repeat in the kind: two requests at once are stopped by the database

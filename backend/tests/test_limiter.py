@@ -113,11 +113,14 @@ def test_clear_limit_goes_on_when_the_storage_fails(monkeypatch, caplog):
     ("user_router.me", "120/minute;5000/day"),
     ("catalog_router.get_items", "600/minute;30000/day"),
     ("catalog_router.get_item", "600/minute;30000/day"),
+    ("catalog_router.get_cover", "1200/minute;60000/day"),
     ("catalog_router.get_genres", "600/minute;30000/day"),
     ("catalog_router.get_languages", "600/minute;30000/day"),
     ("catalog_admin_router.create_item", "30/minute;300/day"),
     ("catalog_admin_router.update_item", "30/minute;300/day"),
     ("catalog_admin_router.delete_item", "30/minute;300/day"),
+    ("catalog_admin_router.update_cover", "30/minute;300/day"),
+    ("catalog_admin_router.remove_cover", "30/minute;300/day"),
     ("catalog_admin_router.create_genre", "30/minute;300/day"),
     ("catalog_admin_router.rename_genre", "30/minute;300/day"),
     ("catalog_admin_router.delete_genre", "30/minute;300/day"),
@@ -145,7 +148,7 @@ def test_every_route_with_a_session_counts_per_user():
 
     assert {route.path for route in routes} == {
         "/auth/logout", "/user/me",
-        "/admin/catalog/items", "/admin/catalog/items/{item_id}",
+        "/admin/catalog/items", "/admin/catalog/items/{item_id}", "/admin/catalog/items/{item_id}/cover",
         "/admin/catalog/genres", "/admin/catalog/genres/{genre_id}",
         "/admin/catalog/languages", "/admin/catalog/languages/{language_id}",
     }
