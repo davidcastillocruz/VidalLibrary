@@ -9,6 +9,9 @@ MAX_OPEN_LOANS = 3
 # How long a reserved copy waits at the library: then the reservation is cancelled and the copy goes back
 PICKUP_TIME = timedelta(days=3)
 
+# Longest loan a librarian can give, in days from the pick-up: a due date further away is a typo
+MAX_LOAN_DAYS = 90
+
 # Where the library is: its days (a due date, "today") are the ones of Barcelona, whatever the clock of the server
 LIBRARY_TIME_ZONE = ZoneInfo("Europe/Madrid")
 

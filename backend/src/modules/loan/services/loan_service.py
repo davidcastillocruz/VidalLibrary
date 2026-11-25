@@ -29,8 +29,8 @@ def _already_borrowed(language: str) -> HTTPException:
     )
 
 
-# A loan as the page of the reader shows it
-def _loan_response(loan: Loan, item: Item) -> LoanResponse:
+# A loan as the page of the reader shows it. Also the base of the one the librarians see
+def loan_response(loan: Loan, item: Item) -> LoanResponse:
     return LoanResponse(
         id=loan.id,
         status=loan.status,
@@ -96,7 +96,7 @@ async def reserve(db: AsyncSession, body: ReservationSchema, language: str, user
 # The loans of the signed-in reader, the newest first
 async def get_my_loans(db: AsyncSession, user: User) -> list[LoanResponse]:
     loans = await loan_repository.get_loans_with_items_by_user_id(db, user.id)
-    return [_loan_response(loan, item) for loan, item in loans]
+    return [loan_response(loan, item) for loan, item in loans]
 
 
 # Cancels a reservation of the signed-in reader that wasn't picked up: its copy goes back to the shelf. The loan of

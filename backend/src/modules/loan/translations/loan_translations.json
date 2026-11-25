@@ -75,5 +75,49 @@
         "en": {
             "message": "Reservation cancelled"
         }
+    },
+    "LOAN_STATUS_CHANGED": {
+        "ca": {
+            "detail": "Aquest préstec ja ha canviat: torna a carregar la llista"
+        },
+        "es": {
+            "detail": "Este préstamo ya ha cambiado: vuelve a cargar la lista"
+        },
+        "en": {
+            "detail": "This loan has already changed: reload the list"
+        }
+    },
+    "DUE_DATE_INVALID": {
+        "ca": {
+            "detail": "La data de retorn ha de ser entre demà i d'aquí a %s dies"
+        },
+        "es": {
+            "detail": "La fecha de devolución tiene que ser entre mañana y dentro de %s días"
+        },
+        "en": {
+            "detail": "The return date has to be between tomorrow and %s days from now"
+        }
+    },
+    "LOAN_PICKED_UP": {
+        "ca": {
+            "message": "Préstec lliurat"
+        },
+        "es": {
+            "message": "Préstamo entregado"
+        },
+        "en": {
+            "message": "Loan handed over"
+        }
+    },
+    "LOAN_RETURNED": {
+        "ca": {
+            "message": "Préstec retornat"
+        },
+        "es": {
+            "message": "Préstamo devuelto"
+        },
+        "en": {
+            "message": "Loan returned"
+        }
     }
 }

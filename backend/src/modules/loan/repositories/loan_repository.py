@@ -1,10 +1,13 @@
 import uuid
+from datetime import date
 
-from sqlalchemy import func, select, update
+from sqlalchemy import func, or_, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.modules.catalog.models.item_model import Item
 from src.modules.loan.models.loan_model import OPEN_STATUSES, Loan, LoanStatus
+from src.modules.loan.schemas.loan_schemas import AdminLoanQuery
+from src.modules.user.models.user_model import User
 
 # No commit and no rollback here: the service commits once, at the end of its flow.
 # On any error the request ends and closing the session (get_db) rolls it back
@@ -70,4 +73,60 @@ async def get_loan_by_id(db: AsyncSession, loan_id: uuid.UUID, lock: bool) -> Lo
 # Cancels the loan: its copy goes back to the shelf
 async def cancel_loan(db: AsyncSession, loan_id: uuid.UUID) -> None:
     query = update(Loan).where(Loan.id == loan_id).values(status=LoanStatus.CANCELLED, cancelled_at=func.now())
+    await db.execute(query)
+
+
+# One page of the loans that match the query with their works and readers, and how many match in all. The open ones
+# by the day they need the desk: the reservations by when they were made, the loans by their due day
+async def get_loans_for_librarians(
+    db: AsyncSession, query: AdminLoanQuery, today: date, limit: int,
+) -> tuple[list[tuple[Loan, Item, User]], int]:
+    conditions = []
+    if query.show == "open":
+        conditions.append(Loan.status.in_(OPEN_STATUSES))
+    elif query.show == "requested":
+        conditions.append(Loan.status == LoanStatus.REQUESTED)
+    elif query.show == "active":
+        conditions.append(Loan.status == LoanStatus.ACTIVE)
+    elif query.show == "overdue":
+        conditions.append(Loan.status == LoanStatus.ACTIVE)
+        conditions.append(Loan.due_on < today)
+    if query.q and query.q.strip():
+        # autoescape: a % or a _ in the search is looked for as it is, not as a wildcard
+        search = query.q.strip().lower()
+        conditions.append(or_(
+            func.lower(User.name).contains(search, autoescape=True),
+            func.lower(User.email).contains(search, autoescape=True),
+            func.lower(Item.title).contains(search, autoescape=True),
+        ))
+    matching = (
+        select(Loan, Item, User)
+        .join(Item, Item.id == Loan.item_id)
+        .join(User, User.id == Loan.user_id)
+        .where(*conditions)
+    )
+    total = await db.scalar(select(func.count()).select_from(matching.subquery())) or 0
+    # Everything at once: the newest first, like a history
+    order = (
+        (Loan.requested_at.desc(), Loan.id)
+        if query.show == "all"
+        else (Loan.due_on.asc().nulls_first(), Loan.requested_at, Loan.id)
+    )
+    page = matching.order_by(*order).offset((query.page - 1) * limit).limit(limit)
+    return [(row[0], row[1], row[2]) for row in (await db.execute(page)).all()], total
+
+
+# Hands over a reserved copy: the loan starts now and has to come back by due_on
+async def pick_up_loan(db: AsyncSession, loan_id: uuid.UUID, due_on: date) -> None:
+    query = (
+        update(Loan)
+        .where(Loan.id == loan_id)
+        .values(status=LoanStatus.ACTIVE, picked_up_at=func.now(), due_on=due_on)
+    )
+    await db.execute(query)
+
+
+# The copy came back: it is on the shelf again
+async def return_loan(db: AsyncSession, loan_id: uuid.UUID) -> None:
+    query = update(Loan).where(Loan.id == loan_id).values(status=LoanStatus.RETURNED, returned_at=func.now())
     await db.execute(query)
