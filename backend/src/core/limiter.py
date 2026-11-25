@@ -24,8 +24,10 @@ limiter = Limiter(
 # shares one. A route with a session counts per user instead (key_func=get_session_user_id), so a student flooding it
 # doesn't leave the rest of the school without it. They only stop a client that floods the API: what has to be stricter
 # (the failures of a password, the emails to one address) has its own limit inside its service.
-# Reads that come with every page (who is signed in, the catalog, a cover)
+# Reads that come with every page of a session (who is signed in, the loans of a reader)
 READ_LIMIT = "120/minute;5000/day"
+# Browsing the public catalog without a session: every student of the school (around 1,600) arrives from its one IP
+CATALOG_LIMIT = "600/minute;30000/day"
 # Signing in and out, again and again in a shared classroom
 SIGN_IN_LIMIT = "60/minute;2000/day"
 # What is done once in a while: a reservation, opening the link of an email, a change in the catalog

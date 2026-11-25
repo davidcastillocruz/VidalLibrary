@@ -111,6 +111,19 @@ def test_clear_limit_goes_on_when_the_storage_fails(monkeypatch, caplog):
     ("auth_router.forgot_password", "30/minute;300/day"),
     ("auth_router.reset_password", "30/minute;300/day"),
     ("user_router.me", "120/minute;5000/day"),
+    ("catalog_router.get_items", "600/minute;30000/day"),
+    ("catalog_router.get_item", "600/minute;30000/day"),
+    ("catalog_router.get_genres", "600/minute;30000/day"),
+    ("catalog_router.get_languages", "600/minute;30000/day"),
+    ("catalog_admin_router.create_item", "30/minute;300/day"),
+    ("catalog_admin_router.update_item", "30/minute;300/day"),
+    ("catalog_admin_router.delete_item", "30/minute;300/day"),
+    ("catalog_admin_router.create_genre", "30/minute;300/day"),
+    ("catalog_admin_router.rename_genre", "30/minute;300/day"),
+    ("catalog_admin_router.delete_genre", "30/minute;300/day"),
+    ("catalog_admin_router.create_language", "30/minute;300/day"),
+    ("catalog_admin_router.rename_language", "30/minute;300/day"),
+    ("catalog_admin_router.delete_language", "30/minute;300/day"),
 ])
 def test_each_route_has_its_limits(route, limits):
     found = [str(limit.limit) for limit in limiter._route_limits[f"src.api.routers.{route}"]]
@@ -130,7 +143,12 @@ def test_no_route_goes_without_a_limit():
 def test_every_route_with_a_session_counts_per_user():
     routes = [route for route in api_routes() if uses(route.dependant, require_auth)]
 
-    assert {route.path for route in routes} == {"/auth/logout", "/user/me"}
+    assert {route.path for route in routes} == {
+        "/auth/logout", "/user/me",
+        "/admin/catalog/items", "/admin/catalog/items/{item_id}",
+        "/admin/catalog/genres", "/admin/catalog/genres/{genre_id}",
+        "/admin/catalog/languages", "/admin/catalog/languages/{language_id}",
+    }
     assert all(counts_per_user(route) for route in routes)
 
 

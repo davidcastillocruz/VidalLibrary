@@ -15,6 +15,8 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 import src.database.models  # noqa: F401
 from src.api.dependencies import get_client_ip
 from src.api.routers.auth_router import router as auth_router
+from src.api.routers.catalog_admin_router import router as catalog_admin_router
+from src.api.routers.catalog_router import router as catalog_router
 from src.api.routers.user_router import router as user_router
 from src.core import request_context
 from src.core.errors import error_response, setup_error_handlers, setup_openapi
@@ -66,6 +68,8 @@ setup_openapi(app)
 
 app.include_router(auth_router)
 app.include_router(user_router)
+app.include_router(catalog_router)
+app.include_router(catalog_admin_router)
 
 
 

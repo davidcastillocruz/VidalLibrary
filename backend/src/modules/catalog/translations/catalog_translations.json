@@ -1,0 +1,156 @@
+{
+    "ITEM_NOT_FOUND": {
+        "ca": {
+            "detail": "Aquesta obra no és al catàleg"
+        },
+        "es": {
+            "detail": "Esta obra no está en el catálogo"
+        },
+        "en": {
+            "detail": "This work isn't in the catalog"
+        }
+    },
+    "GENRE_NOT_FOUND": {
+        "ca": {
+            "detail": "Aquest gènere no existeix"
+        },
+        "es": {
+            "detail": "Este género no existe"
+        },
+        "en": {
+            "detail": "This genre doesn't exist"
+        }
+    },
+    "LANGUAGE_NOT_FOUND": {
+        "ca": {
+            "detail": "Aquesta llengua no existeix"
+        },
+        "es": {
+            "detail": "Este idioma no existe"
+        },
+        "en": {
+            "detail": "This language doesn't exist"
+        }
+    },
+    "UNKNOWN_LANGUAGE": {
+        "ca": {
+            "detail": "La llengua triada ja no existeix: tria'n una altra"
+        },
+        "es": {
+            "detail": "El idioma elegido ya no existe: elige otro"
+        },
+        "en": {
+            "detail": "The chosen language no longer exists: choose another one"
+        }
+    },
+    "INVALID_GENRES": {
+        "ca": {
+            "detail": "Algun gènere triat ja no existeix o és d'un altre tipus d'obra"
+        },
+        "es": {
+            "detail": "Algún género elegido ya no existe o es de otro tipo de obra"
+        },
+        "en": {
+            "detail": "One of the chosen genres no longer exists or is of another kind of work"
+        }
+    },
+    "GENRE_EXISTS": {
+        "ca": {
+            "detail": "Ja hi ha un gènere amb aquest nom"
+        },
+        "es": {
+            "detail": "Ya hay un género con este nombre"
+        },
+        "en": {
+            "detail": "There's already a genre with this name"
+        }
+    },
+    "LANGUAGE_EXISTS": {
+        "ca": {
+            "detail": "Ja hi ha una llengua amb aquest nom"
+        },
+        "es": {
+            "detail": "Ya hay un idioma con este nombre"
+        },
+        "en": {
+            "detail": "There's already a language with this name"
+        }
+    },
+    "ITEM_CREATED": {
+        "ca": {
+            "message": "Obra afegida al catàleg"
+        },
+        "es": {
+            "message": "Obra añadida al catálogo"
+        },
+        "en": {
+            "message": "Work added to the catalog"
+        }
+    },
+    "ITEM_SAVED": {
+        "ca": {
+            "message": "Obra desada"
+        },
+        "es": {
+            "message": "Obra guardada"
+        },
+        "en": {
+            "message": "Work saved"
+        }
+    },
+    "ITEM_DELETED": {
+        "ca": {
+            "message": "Obra eliminada del catàleg"
+        },
+        "es": {
+            "message": "Obra eliminada del catálogo"
+        },
+        "en": {
+            "message": "Work removed from the catalog"
+        }
+    },
+    "GENRE_SAVED": {
+        "ca": {
+            "message": "Gènere desat"
+        },
+        "es": {
+            "message": "Género guardado"
+        },
+        "en": {
+            "message": "Genre saved"
+        }
+    },
+    "GENRE_DELETED": {
+        "ca": {
+            "message": "Gènere eliminat"
+        },
+        "es": {
+            "message": "Género eliminado"
+        },
+        "en": {
+            "message": "Genre deleted"
+        }
+    },
+    "LANGUAGE_SAVED": {
+        "ca": {
+            "message": "Llengua desada"
+        },
+        "es": {
+            "message": "Idioma guardado"
+        },
+        "en": {
+            "message": "Language saved"
+        }
+    },
+    "LANGUAGE_DELETED": {
+        "ca": {
+            "message": "Llengua eliminada"
+        },
+        "es": {
+            "message": "Idioma eliminado"
+        },
+        "en": {
+            "message": "Language deleted"
+        }
+    }
+}

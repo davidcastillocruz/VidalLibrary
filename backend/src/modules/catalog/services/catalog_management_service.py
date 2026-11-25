@@ -1,0 +1,185 @@
+import logging
+import uuid
+
+from fastapi import HTTPException, status
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from src.core.languages import get_error_detail, get_response
+from src.modules.catalog.repositories import genre_repository, item_repository, language_repository
+from src.modules.catalog.schemas.catalog_schemas import (
+    GenreResponse,
+    GenreSchema,
+    ItemCreatedResponse,
+    ItemSchema,
+    LanguageResponse,
+    NameSchema,
+)
+from src.shared.schemas import MessageResponse
+
+logger = logging.getLogger(__name__)
+
+
+# 404 when the work of the path doesn't exist: raised by every change of a work
+def _item_not_found(language: str) -> HTTPException:
+    return HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=get_error_detail("ITEM_NOT_FOUND", language),
+    )
+
+
+# 404 when the genre of the path doesn't exist: renaming it and deleting it
+def _genre_not_found(language: str) -> HTTPException:
+    return HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=get_error_detail("GENRE_NOT_FOUND", language),
+    )
+
+
+# 409 when the kind already has a genre with that name: creating one and renaming it
+def _genre_exists(language: str) -> HTTPException:
+    return HTTPException(
+        status_code=status.HTTP_409_CONFLICT,
+        detail=get_error_detail("GENRE_EXISTS", language),
+    )
+
+
+# 404 when the language of the path doesn't exist: renaming it and deleting it
+def _language_not_found(language: str) -> HTTPException:
+    return HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail=get_error_detail("LANGUAGE_NOT_FOUND", language),
+    )
+
+
+# 409 when there is already a language with that name: creating one and renaming it
+def _language_exists(language: str) -> HTTPException:
+    return HTTPException(
+        status_code=status.HTTP_409_CONFLICT,
+        detail=get_error_detail("LANGUAGE_EXISTS", language),
+    )
+
+
+# What a work gets has to exist: its language, and its genres, each one of its kind. A 400 otherwise
+async def _check_language_and_genres(db: AsyncSession, body: ItemSchema, language: str) -> None:
+    if body.language_id and not await language_repository.get_language_by_id(db, body.language_id, lock=True):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=get_error_detail("UNKNOWN_LANGUAGE", language),
+        )
+    genres = await genre_repository.get_genres_by_ids(db, body.genre_ids, lock=True)
+    if len(genres) != len(set(body.genre_ids)) or any(genre.kind != body.kind for genre in genres):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=get_error_detail("INVALID_GENRES", language),
+        )
+
+
+# Adds a work to the catalog with its genres, all in one commit
+async def create_item(db: AsyncSession, body: ItemSchema, language: str) -> ItemCreatedResponse:
+    await _check_language_and_genres(db, body, language)
+    item = await item_repository.create_item(db, body.kind, body.model_dump(exclude={"kind", "genre_ids"}))
+    await item_repository.set_item_genres(db, item.id, list(set(body.genre_ids)))
+    await db.commit()
+    logger.info("Item created", extra={"item_id": item.id})
+
+    return ItemCreatedResponse(id=item.id, message=get_response("ITEM_CREATED", language)["message"])
+
+
+# Saves the whole work, its genres included, all in one commit. Its kind can change: its genres then have to be
+# of the new one
+async def update_item(db: AsyncSession, item_id: uuid.UUID, body: ItemSchema, language: str) -> MessageResponse:
+    if not await item_repository.get_item_by_id(db, item_id):
+        raise _item_not_found(language)
+    await _check_language_and_genres(db, body, language)
+    await item_repository.update_item(db, item_id, body.model_dump(exclude={"genre_ids"}))
+    await item_repository.set_item_genres(db, item_id, list(set(body.genre_ids)))
+    await db.commit()
+    logger.info("Item saved", extra={"item_id": item_id})
+
+    return MessageResponse(**get_response("ITEM_SAVED", language))
+
+
+# Removes a work from the catalog
+async def delete_item(db: AsyncSession, item_id: uuid.UUID, language: str) -> MessageResponse:
+    if not await item_repository.get_item_by_id(db, item_id):
+        raise _item_not_found(language)
+    await item_repository.delete_item(db, item_id)
+    await db.commit()
+    logger.info("Item deleted", extra={"item_id": item_id})
+
+    return MessageResponse(**get_response("ITEM_DELETED", language))
+
+
+# A new genre of a kind. Its name can't repeat in the kind: two requests at once are stopped by the database
+async def create_genre(db: AsyncSession, body: GenreSchema, language: str) -> GenreResponse:
+    try:
+        genre = await genre_repository.create_genre(db, body.kind, body.name)
+    except IntegrityError:
+        raise _genre_exists(language) from None
+    await db.commit()
+    logger.info("Genre created", extra={"genre_id": genre.id})
+
+    return GenreResponse.model_validate(genre, from_attributes=True)
+
+
+# Renames a genre: every work that has it shows the new name
+async def rename_genre(db: AsyncSession, genre_id: uuid.UUID, body: NameSchema, language: str) -> MessageResponse:
+    if not await genre_repository.get_genre_by_id(db, genre_id):
+        raise _genre_not_found(language)
+    try:
+        await genre_repository.update_genre_name(db, genre_id, body.name)
+    except IntegrityError:
+        raise _genre_exists(language) from None
+    await db.commit()
+    logger.info("Genre renamed", extra={"genre_id": genre_id})
+
+    return MessageResponse(**get_response("GENRE_SAVED", language))
+
+
+# Deletes a genre: its works stay, without it
+async def delete_genre(db: AsyncSession, genre_id: uuid.UUID, language: str) -> MessageResponse:
+    if not await genre_repository.get_genre_by_id(db, genre_id):
+        raise _genre_not_found(language)
+    await genre_repository.delete_genre(db, genre_id)
+    await db.commit()
+    logger.info("Genre deleted", extra={"genre_id": genre_id})
+
+    return MessageResponse(**get_response("GENRE_DELETED", language))
+
+
+# A new language. Its name can't repeat: two requests at once are stopped by the database
+async def create_language(db: AsyncSession, body: NameSchema, language: str) -> LanguageResponse:
+    try:
+        item_language = await language_repository.create_language(db, body.name)
+    except IntegrityError:
+        raise _language_exists(language) from None
+    await db.commit()
+    logger.info("Language created", extra={"language_id": item_language.id})
+
+    return LanguageResponse.model_validate(item_language, from_attributes=True)
+
+
+# Renames a language: every work in it shows the new name
+async def rename_language(db: AsyncSession, language_id: uuid.UUID, body: NameSchema, language: str) -> MessageResponse:
+    if not await language_repository.get_language_by_id(db, language_id, lock=False):
+        raise _language_not_found(language)
+    try:
+        await language_repository.update_language_name(db, language_id, body.name)
+    except IntegrityError:
+        raise _language_exists(language) from None
+    await db.commit()
+    logger.info("Language renamed", extra={"language_id": language_id})
+
+    return MessageResponse(**get_response("LANGUAGE_SAVED", language))
+
+
+# Deletes a language: its works stay, without one
+async def delete_language(db: AsyncSession, language_id: uuid.UUID, language: str) -> MessageResponse:
+    if not await language_repository.get_language_by_id(db, language_id, lock=False):
+        raise _language_not_found(language)
+    await language_repository.delete_language(db, language_id)
+    await db.commit()
+    logger.info("Language deleted", extra={"language_id": language_id})
+
+    return MessageResponse(**get_response("LANGUAGE_DELETED", language))
