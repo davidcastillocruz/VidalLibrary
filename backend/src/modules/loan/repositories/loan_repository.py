@@ -46,6 +46,19 @@ async def get_open_loan_counts_by_item_ids(db: AsyncSession, item_ids: list[uuid
     return dict((await db.execute(query)).all())
 
 
+# Open loans of each reader, for the ones of these ids that have any
+async def get_open_loan_counts_by_user_ids(db: AsyncSession, user_ids: list[uuid.UUID]) -> dict[uuid.UUID, int]:
+    query = (
+        select(Loan.user_id, func.count())
+        .where(
+            Loan.user_id.in_(user_ids),
+            Loan.status.in_(OPEN_STATUSES),
+        )
+        .group_by(Loan.user_id)
+    )
+    return dict((await db.execute(query)).all())
+
+
 # A reservation of the work. The flush gives it its id, and a second open loan of the same work fails here
 async def create_loan(db: AsyncSession, user_id: uuid.UUID, item_id: uuid.UUID) -> Loan:
     loan = Loan(user_id=user_id, item_id=item_id)

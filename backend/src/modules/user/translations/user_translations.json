@@ -1,0 +1,123 @@
+{
+    "USER_NOT_FOUND": {
+        "ca": {
+            "detail": "Aquest compte no existeix"
+        },
+        "es": {
+            "detail": "Esta cuenta no existe"
+        },
+        "en": {
+            "detail": "This account doesn't exist"
+        }
+    },
+    "EMAIL_TAKEN": {
+        "ca": {
+            "detail": "Ja hi ha un compte amb aquest correu"
+        },
+        "es": {
+            "detail": "Ya hay una cuenta con este correo"
+        },
+        "en": {
+            "detail": "There's already an account with this email"
+        }
+    },
+    "CANT_CHANGE_OWN_ROLE": {
+        "ca": {
+            "detail": "No et pots treure el rol de bibliotecari: demana-ho a un altre bibliotecari"
+        },
+        "es": {
+            "detail": "No te puedes quitar el rol de bibliotecario: pídeselo a otro bibliotecario"
+        },
+        "en": {
+            "detail": "You can't take away your own librarian role: ask another librarian"
+        }
+    },
+    "CANT_DELETE_SELF": {
+        "ca": {
+            "detail": "No pots eliminar el teu propi compte: demana-ho a un altre bibliotecari"
+        },
+        "es": {
+            "detail": "No puedes eliminar tu propia cuenta: pídeselo a otro bibliotecario"
+        },
+        "en": {
+            "detail": "You can't delete your own account: ask another librarian"
+        }
+    },
+    "USER_HAS_OPEN_LOANS": {
+        "ca": {
+            "detail": "Aquest compte té préstecs oberts: s'han de tornar o anul·lar abans d'eliminar-lo"
+        },
+        "es": {
+            "detail": "Esta cuenta tiene préstamos abiertos: hay que devolverlos o anularlos antes de eliminarla"
+        },
+        "en": {
+            "detail": "This account has open loans: they have to be returned or cancelled before deleting it"
+        }
+    },
+    "ALREADY_ACTIVE": {
+        "ca": {
+            "detail": "Aquest compte ja té contrasenya: si l'ha oblidat, que la recuperi des de l'inici de sessió"
+        },
+        "es": {
+            "detail": "Esta cuenta ya tiene contraseña: si la ha olvidado, que la recupere desde el inicio de sesión"
+        },
+        "en": {
+            "detail": "This account already has a password: if it was forgotten, it can be recovered from the sign-in page"
+        }
+    },
+    "USER_CREATED": {
+        "ca": {
+            "message": "Compte creat: hem enviat la invitació per correu"
+        },
+        "es": {
+            "message": "Cuenta creada: hemos enviado la invitación por correo"
+        },
+        "en": {
+            "message": "Account created: the invitation has been emailed"
+        }
+    },
+    "INVITATION_SENT": {
+        "ca": {
+            "message": "Invitació enviada de nou"
+        },
+        "es": {
+            "message": "Invitación enviada de nuevo"
+        },
+        "en": {
+            "message": "Invitation sent again"
+        }
+    },
+    "USER_SAVED": {
+        "ca": {
+            "message": "Compte desat"
+        },
+        "es": {
+            "message": "Cuenta guardada"
+        },
+        "en": {
+            "message": "Account saved"
+        }
+    },
+    "USER_DELETED": {
+        "ca": {
+            "message": "Compte eliminat"
+        },
+        "es": {
+            "message": "Cuenta eliminada"
+        },
+        "en": {
+            "message": "Account deleted"
+        }
+    },
+    "LAST_LIBRARIAN": {
+        "ca": {
+            "detail": "La biblioteca no es pot quedar sense cap bibliotecari"
+        },
+        "es": {
+            "detail": "La biblioteca no se puede quedar sin ningún bibliotecario"
+        },
+        "en": {
+            "detail": "The library can't be left without librarians"
+        }
+    }
+}

@@ -123,6 +123,11 @@ def test_clear_limit_goes_on_when_the_storage_fails(monkeypatch, caplog):
     ("loan_admin_router.pick_up", "30/minute;300/day"),
     ("loan_admin_router.return_loan", "30/minute;300/day"),
     ("loan_admin_router.cancel", "30/minute;300/day"),
+    ("user_admin_router.get_users", "120/minute;5000/day"),
+    ("user_admin_router.create_user", "30/minute;300/day"),
+    ("user_admin_router.resend_invitation", "30/minute;300/day"),
+    ("user_admin_router.update_user", "30/minute;300/day"),
+    ("user_admin_router.delete_user", "30/minute;300/day"),
     ("catalog_admin_router.create_item", "30/minute;300/day"),
     ("catalog_admin_router.update_item", "30/minute;300/day"),
     ("catalog_admin_router.delete_item", "30/minute;300/day"),
@@ -161,6 +166,7 @@ def test_every_route_with_a_session_counts_per_user():
         "/loans", "/loans/{loan_id}",
         "/admin/loans", "/admin/loans/{loan_id}/pickup",
         "/admin/loans/{loan_id}/return", "/admin/loans/{loan_id}/cancel",
+        "/admin/users", "/admin/users/{user_id}", "/admin/users/{user_id}/invitation",
     }
     assert all(counts_per_user(route) for route in routes)
 

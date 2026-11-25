@@ -1,9 +1,10 @@
 import uuid
 
-from sqlalchemy import select, update
+from sqlalchemy import delete, func, or_, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.modules.user.models.user_model import User, UserRole
+from src.modules.user.schemas.user_schemas import AdminUserQuery
 
 # No commit and no rollback here: the service commits once, at the end of its flow.
 # On any error the request ends and closing the session (get_db) rolls it back
@@ -33,3 +34,39 @@ async def create_user(db: AsyncSession, email: str, name: str, role: UserRole) -
     db.add(user)
     await db.flush()
     return user
+
+
+# One page of the accounts that match the query, by name, and how many match in all
+async def get_users(db: AsyncSession, query: AdminUserQuery, limit: int) -> tuple[list[User], int]:
+    conditions = []
+    if query.role:
+        conditions.append(User.role == query.role)
+    if query.q and query.q.strip():
+        # autoescape: a % or a _ in the search is looked for as it is, not as a wildcard
+        search = query.q.strip().lower()
+        conditions.append(or_(
+            func.lower(User.name).contains(search, autoescape=True),
+            User.email.contains(search, autoescape=True),
+        ))
+    total = await db.scalar(select(func.count()).select_from(User).where(*conditions)) or 0
+    page = select(User).where(*conditions).order_by(func.lower(User.name), User.id)
+    users = await db.scalars(page.offset((query.page - 1) * limit).limit(limit))
+    return list(users), total
+
+
+# The ids of every librarian, locked until the commit (FOR NO KEY UPDATE) in the order of their ids. Taking a
+# librarian away waits for any other change of a librarian, so two of them taking each other away at once can't leave
+# the library with nobody: the second one finds the first change already done
+async def get_librarian_ids_locked(db: AsyncSession) -> list[uuid.UUID]:
+    query = select(User.id).where(User.role == UserRole.LIBRARIAN).order_by(User.id).with_for_update(key_share=True)
+    return list(await db.scalars(query))
+
+
+# Saves the name and the role of the account
+async def update_user(db: AsyncSession, user_id: uuid.UUID, name: str, role: UserRole) -> None:
+    await db.execute(update(User).where(User.id == user_id).values(name=name, role=role))
+
+
+# Deletes the account: its sessions, links and finished loans go with it (cascade)
+async def delete_user(db: AsyncSession, user_id: uuid.UUID) -> None:
+    await db.execute(delete(User).where(User.id == user_id))
