@@ -14,6 +14,8 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 # Registers every model before the first query, so relationships between models always resolve
 import src.database.models  # noqa: F401
 from src.api.dependencies import get_client_ip
+from src.api.routers.auth_router import router as auth_router
+from src.api.routers.user_router import router as user_router
 from src.core import request_context
 from src.core.errors import error_response, setup_error_handlers, setup_openapi
 from src.core.languages import setup_language_system
@@ -62,6 +64,9 @@ app.state.limiter = limiter
 setup_error_handlers(app)
 setup_openapi(app)
 
+app.include_router(auth_router)
+app.include_router(user_router)
+
 
 
 # Refuses a body over MAX_BODY_BYTES with a 413, by the size it declares or by what has arrived while it's read.
@@ -95,6 +100,12 @@ def limit_body_size(app: ASGIApp) -> ASGIApp:
 app.add_middleware(limit_body_size)
 
 
+# call_next runs the request in another task: the user_id that require_auth puts in the contextvar
+# stays there, it comes back through request.state, shared by the whole request
+def _restore_user_id(request: Request) -> None:
+    request_context.user_id.set(getattr(request.state, "user_id", "-"))
+
+
 # Gives every request an id and logs it: method, path, status and duration
 # The id and the client IP go in every log line written while the request is handled
 # (see core/request_context.py), and the client gets the id in the X-Request-ID header
@@ -109,12 +120,14 @@ async def log_requests(request: Request, call_next: RequestResponseEndpoint) -> 
     try:
         response = await call_next(request)
     except Exception:
+        _restore_user_id(request)
         extra["duration_ms"] = round((time.perf_counter() - start) * 1000, 1)
         logger.exception("%s %s 500", request.method, request.url.path, extra=extra)
         response = error_response(request, "INTERNAL_SERVER_ERROR", status.HTTP_500_INTERNAL_SERVER_ERROR)
         response.headers["X-Request-ID"] = request_id
         return response
 
+    _restore_user_id(request)
     extra["duration_ms"] = round((time.perf_counter() - start) * 1000, 1)
     message = "%s %s %d"
     args = (request.method, request.url.path, response.status_code)

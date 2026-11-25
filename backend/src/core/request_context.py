@@ -5,3 +5,5 @@ from contextvars import ContextVar
 # with its own copy of these values, so requests at the same time never mix them
 request_id: ContextVar[str] = ContextVar("request_id", default="-")
 client_ip: ContextVar[str] = ContextVar("client_ip", default="-")
+# Signed-in user, set by require_auth ("-" for guests and routes without auth)
+user_id: ContextVar[str] = ContextVar("user_id", default="-")

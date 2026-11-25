@@ -29,7 +29,7 @@ async def test_a_background_task_holds_no_connection(client):
 
 
 async def test_database_errors_hide_the_parameters(client):
-    insert = text("INSERT INTO email_requests (email) VALUES (:email)")
+    insert = text("INSERT INTO users (email, name) VALUES (:email, 'Laia Puig')")
     async with engine.begin() as connection:
         await connection.execute(insert, {"email": "ana@test.dev"})
 

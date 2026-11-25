@@ -168,6 +168,8 @@ async def test_request_logs_carry_its_id_and_ip(client, item_routes, caplog):
     record = next(record for record in caplog.records if record.getMessage() == "GET /test-items 200")
     assert record.request_id == response.headers["X-Request-ID"]
     assert record.client_ip == "127.0.0.1"
+    # Without require_auth there is no user
+    assert record.user_id == "-"
 
 
 async def test_own_http_exception_keeps_its_text(client, error_routes):
@@ -208,7 +210,11 @@ async def test_cors_preflight_allows_the_frontend_with_its_cookies(client, item_
 
 # The docs are decided when the app is created: a new process with APP_MODE=production
 def test_production_hides_the_docs():
-    env = {**os.environ, "APP_MODE": "production", "MAIL_START_TLS": "true", "MAIL_SSL_TLS": "false"}
+    env = {
+        **os.environ, "APP_MODE": "production", "MAIL_START_TLS": "true", "MAIL_SSL_TLS": "false",
+        "SESSION_COOKIE_NAME": "__Host-session", "SESSION_COOKIE_SECURE": "true",
+        "FRONTEND_URL": "https://biblioteca.vidal.cat",
+    }
     code = "from src.main import app; print(app.docs_url, app.redoc_url, app.openapi_url)"
     result = subprocess.run(
         [sys.executable, "-c", code], env=env, cwd=BASE_DIR, capture_output=True, text=True, check=True,

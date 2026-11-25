@@ -34,6 +34,7 @@ jobs:
       DATABASE_MAX_OVERFLOW: 10
       RATE_LIMIT_STORAGE_URI: memory://
       CORS_ORIGINS: http://localhost:5173
+      FRONTEND_URL: http://localhost:5173
       MAIN_LANGUAGE: ca
       AVAILABLE_LANGUAGES: ca,es,en
       MAIL_USERNAME: ci@test.dev
@@ -43,6 +44,8 @@ jobs:
       MAIL_PORT: 1025
       MAIL_START_TLS: false
       MAIL_SSL_TLS: false
+      SESSION_COOKIE_NAME: session
+      SESSION_COOKIE_SECURE: false
 
     # Same database as docker-compose.yml, with the credentials of the env above
     services:

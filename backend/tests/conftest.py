@@ -8,6 +8,9 @@ os.environ["APP_MODE"] = "development"
 os.environ["MAIN_LANGUAGE"] = "ca"
 os.environ["AVAILABLE_LANGUAGES"] = "ca,es,en"
 os.environ["CORS_ORIGINS"] = "http://localhost:5173"
+os.environ["FRONTEND_URL"] = "http://localhost:5173"
+os.environ["SESSION_COOKIE_NAME"] = "session"
+os.environ["SESSION_COOKIE_SECURE"] = "false"
 
 import pytest
 from httpx import ASGITransport, AsyncClient

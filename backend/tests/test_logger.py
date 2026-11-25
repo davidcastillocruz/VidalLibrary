@@ -27,8 +27,16 @@ def line(log: logging.LogRecord, colors: bool = False) -> str:
 def test_line_shape():
     parts = line(record()).split(" | ")
 
-    assert parts[1].strip() == "INFO" and parts[2] == "- -"
+    assert parts[1].strip() == "INFO" and parts[2] == "- - -"
     assert parts[3] == "src/core/x.py:42" and parts[4] == "hello"
+
+
+def test_signed_in_user_goes_after_the_ip():
+    token = request_context.user_id.set("u-1")
+    try:
+        assert line(record()).split(" | ")[2] == "- - u-1"
+    finally:
+        request_context.user_id.reset(token)
 
 
 def test_args_and_extras():
@@ -68,7 +76,7 @@ def test_each_task_sees_its_own_request_id():
 
     lines = asyncio.run(main())
 
-    assert all(f" | id{i} - | " in text for i, text in enumerate(lines))
+    assert all(f" | id{i} - - | " in text for i, text in enumerate(lines))
     assert request_context.request_id.get() == "-"
 
 
@@ -138,7 +146,7 @@ def test_setup_logging(capsys, monkeypatch, restore_logging):
     assert "uvicorn | Started server process" in err
     assert "still here" in err
     # The handler adds the request context to every line
-    assert "| abc123 - | src.test | inside a request" in err
+    assert "| abc123 - - | src.test | inside a request" in err
     assert "GET / 200" not in err and "SELECT 1" not in err
 
 

@@ -64,5 +64,38 @@
         "en": {
             "detail": "What you sent is too big"
         }
+    },
+    "NOT_AUTHENTICATED": {
+        "ca": {
+            "detail": "Inicia la sessió per continuar"
+        },
+        "es": {
+            "detail": "Inicia sesión para continuar"
+        },
+        "en": {
+            "detail": "Sign in to continue"
+        }
+    },
+    "ALREADY_AUTHENTICATED": {
+        "ca": {
+            "detail": "Ja has iniciat la sessió"
+        },
+        "es": {
+            "detail": "Ya has iniciado sesión"
+        },
+        "en": {
+            "detail": "You're already signed in"
+        }
+    },
+    "LIBRARIANS_ONLY": {
+        "ca": {
+            "detail": "Només el personal de la biblioteca pot fer això"
+        },
+        "es": {
+            "detail": "Solo el personal de la biblioteca puede hacer esto"
+        },
+        "en": {
+            "detail": "Only the library staff can do this"
+        }
     }
 }

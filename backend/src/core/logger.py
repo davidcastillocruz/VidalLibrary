@@ -13,22 +13,23 @@ DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 # Every LogRecord has these; anything else came from `extra=`
 # color_message: added by uvicorn on some of its own logs
-# request_id, client_ip: added by RequestContextFilter, shown in their own column
+# request_id, client_ip, user_id: added by RequestContextFilter, shown in their own column
 _STANDARD_ATTRS = set(logging.LogRecord("", 0, "", 0, "", (), None).__dict__) | {
-    "message", "asctime", "color_message", "request_id", "client_ip",
+    "message", "asctime", "color_message", "request_id", "client_ip", "user_id",
 }
 
 
-# Adds the id and the client IP of the current request to every log line ("-" outside a request)
+# Adds the id, the client IP and the signed-in user of the current request to every log line ("-" when missing)
 class RequestContextFilter(logging.Filter):
     # Runs on every record: it adds the values and always lets it through
     def filter(self, record: logging.LogRecord) -> bool:
         record.request_id = request_context.request_id.get()
         record.client_ip = request_context.client_ip.get()
+        record.user_id = request_context.user_id.get()
         return True
 
 
-# One line per log: time | level | request id and client IP | file:line or logger | message | extras as key=value
+# One line per log: time | level | request id, client IP and user | file:line or logger | message | extras as key=value
 class AppFormatter(logging.Formatter):
     # ANSI codes of the colors of the terminal, and the one of each level
     RESET = "\033[0m"
@@ -99,7 +100,9 @@ class AppFormatter(logging.Formatter):
             self._paint(f"{record.levelname:<8}", color),
             # Escaped too: uvicorn takes the client IP from X-Forwarded-For when the request comes from 127.0.0.1
             self._paint(
-                self._escape(f"{getattr(record, 'request_id', '-')} {getattr(record, 'client_ip', '-')}"),
+                self._escape(" ".join(
+                    str(getattr(record, attr, "-")) for attr in ("request_id", "client_ip", "user_id")
+                )),
                 self.DIM,
             ),
             self._paint(self._location(record), self.CYAN),

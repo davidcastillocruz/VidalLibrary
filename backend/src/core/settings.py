@@ -13,6 +13,13 @@ SRC_DIR = BASE_DIR / "src"
 # An origin as the browser sends it: http://localhost:5173, https://app.com, http://[::1]:5173
 ORIGIN_PATTERN = re.compile(r"https?://(\[[0-9a-f:.]+\]|[^/\s:\[\]]+)(:\d+)?")
 
+# A cookie name the browser accepts: letters, digits, "_" and "-" (no spaces, "=" or ";")
+COOKIE_NAME_PATTERN = r"^[A-Za-z0-9_-]+$"
+
+# The browser only keeps a "__Host-" cookie when it is Secure, has Path=/ and no Domain:
+# no subdomain can read it or overwrite it
+HOST_COOKIE_PREFIX = "__Host-"
+
 
 # Every field is read from the environment variable with its name, converted to its type and validated:
 # a missing or wrong value stops the app on startup with a clear error.
@@ -59,6 +66,9 @@ class Settings(BaseSettings):
     # Frontends allowed to call the API from the browser, written "http://localhost:5173,https://app.com"
     CORS_ORIGINS: Annotated[list[str], NoDecode]
 
+    # Where the frontend is, for the links of the emails ("https://biblioteca.vidal.cat" + "/password/reset?token=...")
+    FRONTEND_URL: str
+
     # Mail, the booleans accept true/false, 1/0, yes/no...
     MAIL_USERNAME: str
     MAIL_PASSWORD: str
@@ -67,6 +77,11 @@ class Settings(BaseSettings):
     MAIL_PORT: int
     MAIL_START_TLS: bool
     MAIL_SSL_TLS: bool
+
+    # Session cookie: "__Host-session" and true in production, "session" and false in development
+    # (http://localhost has no HTTPS). It is always HttpOnly and SameSite=Lax, that part is not configurable
+    SESSION_COOKIE_NAME: str = Field(pattern=COOKIE_NAME_PATTERN)
+    SESSION_COOKIE_SECURE: bool
 
     # "Production " or "ES" are accepted as "production" and "es"
     @field_validator("APP_MODE", "MAIN_LANGUAGE", mode="before")
@@ -99,6 +114,16 @@ class Settings(BaseSettings):
                 raise ValueError(f"CORS_ORIGINS has '{origin}', an origin is written scheme://host[:port]")
         return origins
 
+    # "https://Biblioteca.Vidal.cat/ " -> "https://biblioteca.vidal.cat": the links add their path after it
+    @field_validator("FRONTEND_URL", mode="before")
+    @classmethod
+    def normalize_frontend_url(cls, value: str) -> str:
+        url = value.strip().rstrip("/").lower()
+        # A path or a missing scheme would build broken links in every email
+        if not ORIGIN_PATTERN.fullmatch(url):
+            raise ValueError(f"FRONTEND_URL has '{url}', it is written scheme://host[:port]")
+        return url
+
     # Checks that need several fields, after each one is valid
     @model_validator(mode="after")
     def check_combinations(self) -> Self:
@@ -110,6 +135,22 @@ class Settings(BaseSettings):
         # Both false means no encryption: only allowed outside production (e.g. Mailpit)
         if self.APP_MODE == "production" and not (self.MAIL_START_TLS or self.MAIL_SSL_TLS):
             raise ValueError("In production, MAIL_START_TLS or MAIL_SSL_TLS must be true")
+        # The browser would drop a "__Host-" cookie without Secure: every sign-in would seem to work and then be lost
+        if self.SESSION_COOKIE_NAME.startswith(HOST_COOKIE_PREFIX) and not self.SESSION_COOKIE_SECURE:
+            raise ValueError(
+                f"A SESSION_COOKIE_NAME starting with {HOST_COOKIE_PREFIX} needs SESSION_COOKIE_SECURE=true",
+            )
+        # The links of the emails carry tokens: in production they only go over HTTPS
+        if self.APP_MODE == "production" and not self.FRONTEND_URL.startswith("https://"):
+            raise ValueError("In production, FRONTEND_URL must start with https://")
+        # In production the session only travels over HTTPS and no subdomain can touch it
+        if self.APP_MODE == "production" and not (
+            self.SESSION_COOKIE_SECURE and self.SESSION_COOKIE_NAME.startswith(HOST_COOKIE_PREFIX)
+        ):
+            raise ValueError(
+                f"In production, SESSION_COOKIE_SECURE must be true and SESSION_COOKIE_NAME must start with "
+                f"{HOST_COOKIE_PREFIX}",
+            )
         return self
 
     # URL.create escapes every part: a password with characters like "/" or "@" doesn't break the URL

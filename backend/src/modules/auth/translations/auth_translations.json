@@ -1,0 +1,35 @@
+{
+    "INVALID_CREDENTIALS": {
+        "ca": {
+            "detail": "El correu o la contrasenya no són correctes"
+        },
+        "es": {
+            "detail": "El correo o la contraseña no son correctos"
+        },
+        "en": {
+            "detail": "The email or the password is wrong"
+        }
+    },
+    "LOGIN_SUCCESS": {
+        "ca": {
+            "message": "Has iniciat la sessió"
+        },
+        "es": {
+            "message": "Has iniciado sesión"
+        },
+        "en": {
+            "message": "You're signed in"
+        }
+    },
+    "LOGOUT_SUCCESS": {
+        "ca": {
+            "message": "Has tancat la sessió"
+        },
+        "es": {
+            "message": "Has cerrado sesión"
+        },
+        "en": {
+            "message": "You're signed out"
+        }
+    }
+}
