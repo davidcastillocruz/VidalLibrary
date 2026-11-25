@@ -185,5 +185,27 @@
         "en": {
             "message": "Cover removed"
         }
+    },
+    "ITEM_HAS_OPEN_LOANS": {
+        "ca": {
+            "detail": "Aquesta obra té préstecs oberts: s'han de tornar o anul·lar abans d'eliminar-la"
+        },
+        "es": {
+            "detail": "Esta obra tiene préstamos abiertos: hay que devolverlos o anularlos antes de eliminarla"
+        },
+        "en": {
+            "detail": "This work has open loans: they have to be returned or cancelled before deleting it"
+        }
+    },
+    "COPIES_BELOW_OPEN_LOANS": {
+        "ca": {
+            "detail": "Aquesta obra té %s préstecs oberts: no pot tenir menys exemplars"
+        },
+        "es": {
+            "detail": "Esta obra tiene %s préstamos abiertos: no puede tener menos ejemplares"
+        },
+        "en": {
+            "detail": "This work has %s open loans: it can't have fewer copies"
+        }
     }
 }

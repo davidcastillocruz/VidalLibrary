@@ -15,14 +15,15 @@ from src.modules.catalog.schemas.catalog_schemas import (
     ItemSummary,
     LanguageResponse,
 )
+from src.modules.loan.repositories import loan_repository
 from src.storage import files
 
 # Works in each page of the catalog: two rows of a wide screen
 PAGE_SIZE = 24
 
 
-# A work as its card shows it
-def _summary(item: Item) -> ItemSummary:
+# A work as its card shows it. open_loans: its copies held by an open loan
+def _summary(item: Item, open_loans: int) -> ItemSummary:
     return ItemSummary(
         id=item.id,
         kind=item.kind,
@@ -30,6 +31,7 @@ def _summary(item: Item) -> ItemSummary:
         creator=item.creator,
         year=item.year,
         copies=item.copies,
+        available=item.copies - open_loans,
         cover=cover_files.cover_version(item.cover_key) if item.cover_key else None,
     )
 
@@ -37,15 +39,16 @@ def _summary(item: Item) -> ItemSummary:
 # One page of the catalog, with the filters of the query. Anyone can browse it, with or without a session
 async def get_items(db: AsyncSession, query: CatalogQuery) -> CatalogPage:
     items, total = await item_repository.get_items(db, query, PAGE_SIZE)
+    open_loans = await loan_repository.get_open_loan_counts_by_item_ids(db, [item.id for item in items])
     return CatalogPage(
-        items=[_summary(item) for item in items],
+        items=[_summary(item, open_loans.get(item.id, 0)) for item in items],
         total=total,
     )
 
 
 # A work with its language and its genres, or a 404
 async def get_item(db: AsyncSession, item_id: uuid.UUID, language: str) -> ItemDetail:
-    item = await item_repository.get_item_by_id(db, item_id)
+    item = await item_repository.get_item_by_id(db, item_id, lock=False)
     if not item:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -55,8 +58,9 @@ async def get_item(db: AsyncSession, item_id: uuid.UUID, language: str) -> ItemD
     if item.language_id:
         item_language = await language_repository.get_language_by_id(db, item.language_id, lock=False)
     genres = await genre_repository.get_genres_by_item_id(db, item.id)
+    open_loans = await loan_repository.get_open_loan_counts_by_item_ids(db, [item.id])
     return ItemDetail(
-        **_summary(item).model_dump(),
+        **_summary(item, open_loans.get(item.id, 0)).model_dump(),
         synopsis=item.synopsis,
         language=LanguageResponse.model_validate(item_language, from_attributes=True) if item_language else None,
         genres=[GenreResponse.model_validate(genre, from_attributes=True) for genre in genres],

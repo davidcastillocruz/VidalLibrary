@@ -11,7 +11,8 @@ from src.modules.auth.models.auth_session_model import AuthSession
 from src.modules.catalog.models.genre_model import Genre
 from src.modules.catalog.models.item_model import Item, ItemKind, item_genres
 from src.modules.catalog.models.language_model import ItemLanguage
-from src.modules.catalog.repositories import genre_repository, language_repository
+from src.modules.catalog.repositories import genre_repository, item_repository, language_repository
+from src.modules.catalog.services import catalog_management_service
 from src.modules.user.models.user_model import User, UserRole
 from src.security.cookies import SESSION_DURATION
 from src.security.tokens import new_token
@@ -289,3 +290,28 @@ async def test_a_genre_or_language_being_given_cant_be_deleted_meanwhile(client,
 
         with pytest.raises(DBAPIError, match="lock timeout"):
             await deleting.execute(delete(model).where(model.id == row_id))
+
+
+# Saving a work while its language is deleted: the deletion takes the works first, in the order of a save (the work,
+# then its language), so it waits for the save instead of both waiting for each other (a deadlock, a 500)
+async def test_deleting_a_language_waits_for_the_save_of_one_of_its_works(client):
+    catalan = await add_language("Català")
+    async with AsyncSessionLocal() as db:
+        item = Item(kind=ItemKind.BOOK, title="Aloma", creator="Mercè Rodoreda", copies=1, language_id=catalan.id)
+        db.add(item)
+        await db.commit()
+
+    async with AsyncSessionLocal() as saving, AsyncSessionLocal() as deleting:
+        await item_repository.get_item_by_id(saving, item.id, lock=True)
+        await deleting.execute(text("SET LOCAL lock_timeout = '5s'"))
+        deletion = asyncio.create_task(catalog_management_service.delete_language(deleting, catalan.id, "ca"))
+        await asyncio.sleep(0.3)
+
+        # The deletion waits for the work, and hasn't touched the language yet: the save can take it
+        await saving.execute(text("SET LOCAL lock_timeout = '300ms'"))
+        assert await language_repository.get_language_by_id(saving, catalan.id, lock=True)
+        assert not deletion.done()
+        await saving.commit()
+        await deletion
+
+    assert await rows(ItemLanguage) == []

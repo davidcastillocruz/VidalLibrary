@@ -41,8 +41,19 @@ async def get_items(db: AsyncSession, query: CatalogQuery, limit: int) -> tuple[
     return list(items), total
 
 
-async def get_item_by_id(db: AsyncSession, item_id: uuid.UUID) -> Item | None:
-    return await db.get(Item, item_id)
+# The work of an id, None if there is none.
+# lock: its row locked until the commit (FOR NO KEY UPDATE) and read again even if this session already had it: a
+# reservation and a change of its copies wait for each other, so the copies never fall under the open loans
+async def get_item_by_id(db: AsyncSession, item_id: uuid.UUID, lock: bool) -> Item | None:
+    return await db.get(Item, item_id, with_for_update={"key_share": True} if lock else None, populate_existing=lock)
+
+
+# Locks the works of a language until the commit (FOR NO KEY UPDATE), in the order of their ids. Deleting the
+# language sets theirs to NULL: taking them first is the order of saving a work (the work, then its language), so a
+# deletion and a save of one of its works wait for each other instead of each holding what the other needs
+async def lock_items_by_language_id(db: AsyncSession, language_id: uuid.UUID) -> None:
+    query = select(Item.id).where(Item.language_id == language_id).order_by(Item.id)
+    await db.execute(query.with_for_update(key_share=True))
 
 
 # The key of the cover of the work, None without one (or without the work).

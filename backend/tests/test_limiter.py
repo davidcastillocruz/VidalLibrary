@@ -116,6 +116,9 @@ def test_clear_limit_goes_on_when_the_storage_fails(monkeypatch, caplog):
     ("catalog_router.get_cover", "1200/minute;60000/day"),
     ("catalog_router.get_genres", "600/minute;30000/day"),
     ("catalog_router.get_languages", "600/minute;30000/day"),
+    ("loan_router.reserve", "30/minute;300/day"),
+    ("loan_router.get_my_loans", "120/minute;5000/day"),
+    ("loan_router.cancel_my_loan", "30/minute;300/day"),
     ("catalog_admin_router.create_item", "30/minute;300/day"),
     ("catalog_admin_router.update_item", "30/minute;300/day"),
     ("catalog_admin_router.delete_item", "30/minute;300/day"),
@@ -151,6 +154,7 @@ def test_every_route_with_a_session_counts_per_user():
         "/admin/catalog/items", "/admin/catalog/items/{item_id}", "/admin/catalog/items/{item_id}/cover",
         "/admin/catalog/genres", "/admin/catalog/genres/{genre_id}",
         "/admin/catalog/languages", "/admin/catalog/languages/{language_id}",
+        "/loans", "/loans/{loan_id}",
     }
     assert all(counts_per_user(route) for route in routes)
 

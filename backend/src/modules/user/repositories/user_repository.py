@@ -14,9 +14,11 @@ async def get_user_by_email(db: AsyncSession, email: str) -> User | None:
     return await db.scalar(select(User).where(User.email == email))
 
 
-# The user of an id, None if there is none
-async def get_user_by_id(db: AsyncSession, user_id: uuid.UUID) -> User | None:
-    return await db.get(User, user_id)
+# The user of an id, None if there is none.
+# lock: its row locked until the commit (FOR NO KEY UPDATE) and read again even if this session already had it: the
+# reservations of one reader wait for each other, and each one counts the loans the previous one left
+async def get_user_by_id(db: AsyncSession, user_id: uuid.UUID, lock: bool) -> User | None:
+    return await db.get(User, user_id, with_for_update={"key_share": True} if lock else None, populate_existing=lock)
 
 
 # Saves a new hash of the password: a stronger one after a login, or the one chosen from an email

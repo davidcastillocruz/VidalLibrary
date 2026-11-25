@@ -59,6 +59,8 @@ class ItemSummary(BaseModel):
     creator: str
     year: int | None
     copies: int
+    # Copies not held by an open loan: the ones that can be reserved now
+    available: int
     # The version of its cover, for GET /catalog/items/{id}/cover?v=. None without one: the frontend draws its own
     cover: str | None
 

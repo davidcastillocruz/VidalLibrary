@@ -1,0 +1,79 @@
+{
+    "LOAN_LIMIT_REACHED": {
+        "ca": {
+            "detail": "Ja tens %s préstecs oberts: torna'n un o anul·la una reserva per demanar-ne un altre"
+        },
+        "es": {
+            "detail": "Ya tienes %s préstamos abiertos: devuelve uno o anula una reserva para pedir otro"
+        },
+        "en": {
+            "detail": "You already have %s open loans: return one or cancel a reservation to ask for another"
+        }
+    },
+    "ALREADY_BORROWED": {
+        "ca": {
+            "detail": "Ja tens aquesta obra reservada o en préstec"
+        },
+        "es": {
+            "detail": "Ya tienes esta obra reservada o en préstamo"
+        },
+        "en": {
+            "detail": "You already have this work reserved or on loan"
+        }
+    },
+    "NO_COPIES_LEFT": {
+        "ca": {
+            "detail": "No en queda cap exemplar lliure"
+        },
+        "es": {
+            "detail": "No queda ningún ejemplar libre"
+        },
+        "en": {
+            "detail": "There are no free copies left"
+        }
+    },
+    "LOAN_NOT_FOUND": {
+        "ca": {
+            "detail": "Aquest préstec no existeix"
+        },
+        "es": {
+            "detail": "Este préstamo no existe"
+        },
+        "en": {
+            "detail": "This loan doesn't exist"
+        }
+    },
+    "LOAN_NOT_CANCELLABLE": {
+        "ca": {
+            "detail": "Només es pot anul·lar una reserva que encara no s'ha recollit"
+        },
+        "es": {
+            "detail": "Solo se puede anular una reserva que aún no se ha recogido"
+        },
+        "en": {
+            "detail": "Only a reservation that wasn't picked up can be cancelled"
+        }
+    },
+    "LOAN_REQUESTED": {
+        "ca": {
+            "message": "Reservat. Passa a recollir-lo a la biblioteca en 3 dies"
+        },
+        "es": {
+            "message": "Reservado. Pasa a recogerlo a la biblioteca en 3 días"
+        },
+        "en": {
+            "message": "Reserved. Pick it up at the library within 3 days"
+        }
+    },
+    "LOAN_CANCELLED": {
+        "ca": {
+            "message": "Reserva anul·lada"
+        },
+        "es": {
+            "message": "Reserva anulada"
+        },
+        "en": {
+            "message": "Reservation cancelled"
+        }
+    }
+}
