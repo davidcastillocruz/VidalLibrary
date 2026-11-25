@@ -31,5 +31,49 @@
         "en": {
             "message": "You're signed out"
         }
+    },
+    "PASSWORD_RESET_EMAIL_SENT": {
+        "ca": {
+            "message": "Si aquest correu té compte, t'hem enviat un enllaç per canviar la contrasenya"
+        },
+        "es": {
+            "message": "Si este correo tiene cuenta, te hemos enviado un enlace para cambiar la contraseña"
+        },
+        "en": {
+            "message": "If this email has an account, we've sent it a link to change the password"
+        }
+    },
+    "PASSWORD_RESET_SUCCESS": {
+        "ca": {
+            "message": "Contrasenya canviada. Ja pots iniciar la sessió"
+        },
+        "es": {
+            "message": "Contraseña cambiada. Ya puedes iniciar sesión"
+        },
+        "en": {
+            "message": "Password changed. You can sign in now"
+        }
+    },
+    "ACCOUNT_READY": {
+        "ca": {
+            "message": "El teu compte està a punt. Ja pots iniciar la sessió"
+        },
+        "es": {
+            "message": "Tu cuenta está lista. Ya puedes iniciar sesión"
+        },
+        "en": {
+            "message": "Your account is ready. You can sign in now"
+        }
+    },
+    "INVALID_PASSWORD_LINK": {
+        "ca": {
+            "detail": "Aquest enllaç no és vàlid o ha caducat. Demana'n un de nou"
+        },
+        "es": {
+            "detail": "Este enlace no es válido o ha caducado. Pide uno nuevo"
+        },
+        "en": {
+            "detail": "This link isn't valid or has expired. Ask for a new one"
+        }
     }
 }

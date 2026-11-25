@@ -108,6 +108,8 @@ def test_clear_limit_goes_on_when_the_storage_fails(monkeypatch, caplog):
 @pytest.mark.parametrize("route, limits", [
     ("auth_router.login", "60/minute;2000/day"),
     ("auth_router.logout", "60/minute;2000/day"),
+    ("auth_router.forgot_password", "30/minute;300/day"),
+    ("auth_router.reset_password", "30/minute;300/day"),
     ("user_router.me", "120/minute;5000/day"),
 ])
 def test_each_route_has_its_limits(route, limits):

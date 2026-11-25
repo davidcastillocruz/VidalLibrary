@@ -53,3 +53,16 @@ async def create_session(
 # Closes one session, the one of a sign-out
 async def revoke_session(db: AsyncSession, session_id: uuid.UUID) -> None:
     await db.execute(update(AuthSession).where(AuthSession.id == session_id).values(revoked_at=func.now()))
+
+
+# Closes every open session of the user: a new password leaves out whoever knew the old one
+async def revoke_all_user_sessions(db: AsyncSession, user_id: uuid.UUID) -> None:
+    query = (
+        update(AuthSession)
+        .where(
+            AuthSession.user_id == user_id,
+            AuthSession.revoked_at.is_(None),
+        )
+        .values(revoked_at=func.now())
+    )
+    await db.execute(query)

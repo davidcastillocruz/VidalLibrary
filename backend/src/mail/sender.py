@@ -26,8 +26,9 @@ def _mask_email(email: str) -> str:
     return f"{name[:1]}***{at}{domain}" if at else "***"
 
 
-# Runs as a background task, after the response: errors are logged, not raised (nobody would catch them)
-async def send_email(subject: str, recipients: list[str], body: str) -> None:
+# Runs as a background task, after the response: errors are logged, not raised (nobody would catch them). Returns
+# whether it was sent: a background task ignores it, a command tells it to whoever ran it
+async def send_email(subject: str, recipients: list[str], body: str) -> bool:
     masked = [_mask_email(recipient) for recipient in recipients]
 
     try:
@@ -46,7 +47,7 @@ async def send_email(subject: str, recipients: list[str], body: str) -> None:
             exc,
             extra={"server": settings.MAIL_SERVER, "port": settings.MAIL_PORT, "subject": subject},
         )
-        return
+        return False
 
     except SMTPRecipientsRefused as exc:
         # The server rejected the recipients (550 user unknown...): the SMTP codes, the addresses masked
@@ -54,7 +55,7 @@ async def send_email(subject: str, recipients: list[str], body: str) -> None:
             "Mail server refused the recipients",
             extra={"recipients": masked, "codes": [refused.code for refused in exc.recipients], "subject": subject},
         )
-        return
+        return False
 
     except Exception as exc:
         # No traceback: the messages of the SMTP errors carry the plain recipient
@@ -63,6 +64,7 @@ async def send_email(subject: str, recipients: list[str], body: str) -> None:
             type(exc).__name__,
             extra={"recipients": masked, "subject": subject},
         )
-        return
+        return False
 
     logger.info("Email sent", extra={"recipients": masked, "subject": subject})
+    return True

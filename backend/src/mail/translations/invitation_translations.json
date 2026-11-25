@@ -1,0 +1,28 @@
+{
+    "INVITATION_EMAIL": {
+        "ca": {
+            "subject": "Ja tens compte a la Biblioteca Vidal i Barraquer",
+            "title": "Benvingut a la biblioteca",
+            "text": "Hola, %s. La biblioteca t'ha creat un compte per reservar llibres, pel·lícules i jocs de taula. Tria la teva contrasenya per entrar.",
+            "button": "Tria la contrasenya",
+            "note": "L'enllaç caduca d'aquí a 7 dies. Si no esperaves aquest correu, pots ignorar-lo.",
+            "fallback": "Si el botó no funciona, copia aquest enllaç al navegador:"
+        },
+        "es": {
+            "subject": "Ya tienes cuenta en la Biblioteca Vidal i Barraquer",
+            "title": "Bienvenido a la biblioteca",
+            "text": "Hola, %s. La biblioteca te ha creado una cuenta para reservar libros, películas y juegos de mesa. Elige tu contraseña para entrar.",
+            "button": "Elige la contraseña",
+            "note": "El enlace caduca en 7 días. Si no esperabas este correo, puedes ignorarlo.",
+            "fallback": "Si el botón no funciona, copia este enlace en el navegador:"
+        },
+        "en": {
+            "subject": "You have an account at the Vidal i Barraquer Library",
+            "title": "Welcome to the library",
+            "text": "Hi %s. The library has created an account for you to reserve books, films and board games. Choose your password to sign in.",
+            "button": "Choose your password",
+            "note": "The link expires in 7 days. If you weren't expecting this email, you can ignore it.",
+            "fallback": "If the button doesn't work, copy this link into your browser:"
+        }
+    }
+}
