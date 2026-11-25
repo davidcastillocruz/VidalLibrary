@@ -1,0 +1,28 @@
+{
+    "DUE_SOON_EMAIL": {
+        "ca": {
+            "subject": "«%s» s'ha de tornar aviat",
+            "title": "Préstec a punt de vèncer",
+            "text": "Hola, %s. Recorda que has de tornar «%s» a la biblioteca com a tard el %s.",
+            "button": "Veure els meus préstecs",
+            "note": "Si ja l'has tornat, no cal que facis res.",
+            "fallback": "Si el botó no funciona, copia aquest enllaç al navegador:"
+        },
+        "es": {
+            "subject": "«%s» hay que devolverlo pronto",
+            "title": "Préstamo a punto de vencer",
+            "text": "Hola, %s. Recuerda que tienes que devolver «%s» a la biblioteca como tarde el %s.",
+            "button": "Ver mis préstamos",
+            "note": "Si ya lo has devuelto, no hace falta que hagas nada.",
+            "fallback": "Si el botón no funciona, copia este enlace en el navegador:"
+        },
+        "en": {
+            "subject": "“%s” is due soon",
+            "title": "Loan due soon",
+            "text": "Hi %s. Remember to bring “%s” back to the library by %s.",
+            "button": "See my loans",
+            "note": "If you have already returned it, there's nothing to do.",
+            "fallback": "If the button doesn't work, copy this link into your browser:"
+        }
+    }
+}

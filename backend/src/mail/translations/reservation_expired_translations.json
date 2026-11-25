@@ -1,0 +1,28 @@
+{
+    "RESERVATION_EXPIRED_EMAIL": {
+        "ca": {
+            "subject": "La teva reserva ha caducat",
+            "title": "Reserva caducada",
+            "text": "Hola, %s. Ningú ha passat a recollir «%s» en 3 dies i la reserva s'ha anul·lat: l'exemplar torna al prestatge.",
+            "button": "Torna-la a reservar",
+            "note": "Si encara la vols, pots tornar-la a reservar mentre en quedin exemplars.",
+            "fallback": "Si el botó no funciona, copia aquest enllaç al navegador:"
+        },
+        "es": {
+            "subject": "Tu reserva ha caducado",
+            "title": "Reserva caducada",
+            "text": "Hola, %s. Nadie ha pasado a recoger «%s» en 3 días y la reserva se ha anulado: el ejemplar vuelve a la estantería.",
+            "button": "Vuelve a reservarla",
+            "note": "Si aún la quieres, puedes volver a reservarla mientras queden ejemplares.",
+            "fallback": "Si el botón no funciona, copia este enlace en el navegador:"
+        },
+        "en": {
+            "subject": "Your reservation has expired",
+            "title": "Reservation expired",
+            "text": "Hi %s. Nobody picked up “%s” within 3 days and the reservation has been cancelled: the copy goes back to the shelf.",
+            "button": "Reserve it again",
+            "note": "If you still want it, you can reserve it again while there are copies left.",
+            "fallback": "If the button doesn't work, copy this link into your browser:"
+        }
+    }
+}

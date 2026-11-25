@@ -54,3 +54,6 @@ class Loan(Base):
     due_on: Mapped[date | None] = mapped_column(Date)
     returned_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     cancelled_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # When its reader was told it is due soon, and that it is late: each warning goes once (loan_job)
+    due_soon_warned_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    overdue_warned_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))

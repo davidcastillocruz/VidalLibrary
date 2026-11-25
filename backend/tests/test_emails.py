@@ -11,6 +11,9 @@ TEXTS = {"subject": "S", "title": "T", "text": "x", "note": "N", "button": "B", 
 # Every email with arguments for its gaps, to build it in every language
 ARGS = {
     "token": "tok_en-1",
+    "title": "Aloma",
+    "item_id": "6f1c2e0a-0000-4000-8000-000000000000",
+    "due_on": "27/11/2026",
 }
 BUILDERS = [function for name, function in inspect.getmembers(emails, inspect.isfunction) if name.startswith("build_")]
 

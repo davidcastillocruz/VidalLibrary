@@ -1,3 +1,5 @@
+import uuid
+
 from src.core.languages import get_response
 from src.core.settings import settings
 from src.mail.layout import render_email
@@ -24,3 +26,24 @@ def build_password_reset_email(language: str, name: str, token: str) -> tuple[st
 def build_password_changed_email(language: str, name: str) -> tuple[str, str]:
     texts = get_response("PASSWORD_CHANGED_EMAIL", language, {"text": (name,)})
     return texts["subject"], render_email(language, texts, href=f"{settings.FRONTEND_URL}/login")
+
+
+# --- The loans (loan_job) ---
+
+
+# Nobody picked the reserved copy up in time: the reservation is cancelled, and the button reserves the work again
+def build_reservation_expired_email(language: str, name: str, title: str, item_id: uuid.UUID) -> tuple[str, str]:
+    texts = get_response("RESERVATION_EXPIRED_EMAIL", language, {"text": (name, title)})
+    return texts["subject"], render_email(language, texts, href=f"{settings.FRONTEND_URL}/items/{item_id}")
+
+
+# A loan due in the next days, with its due day written for people: the button opens the reader's loans
+def build_due_soon_email(language: str, name: str, title: str, due_on: str) -> tuple[str, str]:
+    texts = get_response("DUE_SOON_EMAIL", language, {"subject": (title,), "text": (name, title, due_on)})
+    return texts["subject"], render_email(language, texts, href=f"{settings.FRONTEND_URL}/loans")
+
+
+# A loan past its due day: it says which day it was, and that other readers wait for the copy
+def build_overdue_email(language: str, name: str, title: str, due_on: str) -> tuple[str, str]:
+    texts = get_response("OVERDUE_EMAIL", language, {"subject": (title,), "text": (name, title, due_on)})
+    return texts["subject"], render_email(language, texts, href=f"{settings.FRONTEND_URL}/loans")

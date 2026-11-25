@@ -1,0 +1,28 @@
+{
+    "OVERDUE_EMAIL": {
+        "ca": {
+            "subject": "«%s» s'havia de tornar",
+            "title": "Préstec vençut",
+            "text": "Hola, %s. «%s» s'havia de tornar a la biblioteca el %s. Porta'l tan aviat com puguis: altres lectors l'esperen.",
+            "button": "Veure els meus préstecs",
+            "note": "Si ja l'has tornat, no cal que facis res.",
+            "fallback": "Si el botó no funciona, copia aquest enllaç al navegador:"
+        },
+        "es": {
+            "subject": "«%s» tenía que devolverse",
+            "title": "Préstamo vencido",
+            "text": "Hola, %s. «%s» tenía que devolverse a la biblioteca el %s. Tráelo en cuanto puedas: otros lectores lo esperan.",
+            "button": "Ver mis préstamos",
+            "note": "Si ya lo has devuelto, no hace falta que hagas nada.",
+            "fallback": "Si el botón no funciona, copia este enlace en el navegador:"
+        },
+        "en": {
+            "subject": "“%s” was due",
+            "title": "Loan overdue",
+            "text": "Hi %s. “%s” was due back at the library on %s. Bring it as soon as you can: other readers are waiting for it.",
+            "button": "See my loans",
+            "note": "If you have already returned it, there's nothing to do.",
+            "fallback": "If the button doesn't work, copy this link into your browser:"
+        }
+    }
+}

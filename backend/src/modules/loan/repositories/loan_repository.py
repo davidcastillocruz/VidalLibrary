@@ -1,7 +1,8 @@
 import uuid
-from datetime import date
+from datetime import date, datetime
+from typing import NamedTuple
 
-from sqlalchemy import func, or_, select, update
+from sqlalchemy import ColumnElement, func, or_, select, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.modules.catalog.models.item_model import Item
@@ -130,3 +131,52 @@ async def pick_up_loan(db: AsyncSession, loan_id: uuid.UUID, due_on: date) -> No
 async def return_loan(db: AsyncSession, loan_id: uuid.UUID) -> None:
     query = update(Loan).where(Loan.id == loan_id).values(status=LoanStatus.RETURNED, returned_at=func.now())
     await db.execute(query)
+
+
+# A loan a warning is sent about, with what the email needs
+class WarnedLoan(NamedTuple):
+    loan_id: uuid.UUID
+    item_id: uuid.UUID
+    email: str
+    name: str
+    title: str
+    due_on: date | None
+
+
+# Changes up to limit loans that match where with values, and returns them with their readers and works. They are
+# locked (FOR NO KEY UPDATE: no key changes) and the ones another process already has are skipped (SKIP LOCKED), so
+# each row changes once: several processes running loan_job never take the same loan
+async def _claim_loans(
+    db: AsyncSession, where: list[ColumnElement[bool]], values: dict, limit: int,
+) -> list[WarnedLoan]:
+    ids = select(Loan.id).where(*where).order_by(Loan.id).limit(limit).with_for_update(skip_locked=True, key_share=True)
+    query = (
+        update(Loan)
+        .where(Loan.id.in_(ids.scalar_subquery()), Loan.user_id == User.id, Loan.item_id == Item.id)
+        .values(**values)
+        .returning(Loan.id, Loan.item_id, User.email, User.name, Item.title, Loan.due_on)
+    )
+    return [WarnedLoan(*row) for row in (await db.execute(query)).all()]
+
+
+# Cancels the reservations made before requested_before: nobody picked them up, their copies go back to the shelf
+async def expire_reservations(db: AsyncSession, requested_before: datetime, limit: int) -> list[WarnedLoan]:
+    where = [Loan.status == LoanStatus.REQUESTED, Loan.requested_at < requested_before]
+    return await _claim_loans(db, where, {"status": LoanStatus.CANCELLED, "cancelled_at": func.now()}, limit)
+
+
+# Marks as warned the loans due from today to last_day whose readers weren't told yet
+async def claim_due_soon_loans(db: AsyncSession, today: date, last_day: date, limit: int) -> list[WarnedLoan]:
+    where = [
+        Loan.status == LoanStatus.ACTIVE,
+        Loan.due_on >= today,
+        Loan.due_on <= last_day,
+        Loan.due_soon_warned_at.is_(None),
+    ]
+    return await _claim_loans(db, where, {"due_soon_warned_at": func.now()}, limit)
+
+
+# Marks as warned the loans late (due before today) whose readers weren't told yet
+async def claim_overdue_loans(db: AsyncSession, today: date, limit: int) -> list[WarnedLoan]:
+    where = [Loan.status == LoanStatus.ACTIVE, Loan.due_on < today, Loan.overdue_warned_at.is_(None)]
+    return await _claim_loans(db, where, {"overdue_warned_at": func.now()}, limit)

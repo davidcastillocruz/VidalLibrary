@@ -1,3 +1,5 @@
+import asyncio
+import contextlib
 import logging
 import secrets
 import time
@@ -27,6 +29,7 @@ from src.core.limiter import limiter
 from src.core.logger import setup_logging
 from src.core.settings import settings
 from src.database.session import engine
+from src.modules.loan.loan_job import run_loan_job
 
 setup_logging()
 logger = logging.getLogger(__name__)
@@ -45,8 +48,12 @@ MAX_BODY_BYTES = 6 * 1024 * 1024
 async def lifespan(app: FastAPI) -> AsyncGenerator[None]:
     # --- Startup ---
     setup_language_system()
+    loan_job = asyncio.create_task(run_loan_job())
     yield
     # --- Shutdown ---
+    loan_job.cancel()
+    with contextlib.suppress(asyncio.CancelledError):
+        await loan_job
     # Closes the connections of the database pool
     await engine.dispose()
 
