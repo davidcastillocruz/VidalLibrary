@@ -26,5 +26,6 @@ describe('NotFoundPage', () => {
 
     expect(screen.getByText('No hi ha res a /llibres/x.')).toBeTruthy();
     expect(screen.getByRole('link', { name: "Torna a l'inici" }).getAttribute('href')).toBe('/');
+    expect(screen.getByRole('heading', { level: 1 }).textContent).toBe('Aquest volum no és al prestatge');
   });
 });

@@ -1,0 +1,41 @@
+.page {
+  display: grid;
+  justify-items: center;
+  padding-top: 24px;
+}
+
+.card {
+  width: min(440px, 100%);
+  display: grid;
+  gap: 24px;
+  padding: 36px 32px 32px;
+  border-radius: var(--radius-xl);
+  background: var(--raised);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-2);
+}
+
+.header {
+  display: grid;
+  gap: 8px;
+}
+
+.title {
+  font-size: 32px;
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.card form {
+  display: grid;
+  gap: 18px;
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 28px 20px 24px;
+  }
+}

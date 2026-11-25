@@ -1,0 +1,12 @@
+{
+  "yes": {
+    "ca": "Sí, fes-ho",
+    "es": "Sí, hazlo",
+    "en": "Yes, do it"
+  },
+  "no": {
+    "ca": "No",
+    "es": "No",
+    "en": "No"
+  }
+}

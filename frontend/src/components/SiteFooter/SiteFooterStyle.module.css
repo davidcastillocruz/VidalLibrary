@@ -1,0 +1,58 @@
+.footer {
+  margin-top: 96px;
+  background: var(--band);
+  color: var(--band-muted);
+  border-top: 4px solid var(--signal);
+}
+
+.inner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 40px var(--page-gutter) max(40px, env(safe-area-inset-bottom, 0px));
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 28px 48px;
+}
+
+.about,
+.place {
+  display: grid;
+  gap: 6px;
+  font-size: 14.5px;
+}
+
+.about {
+  max-width: 48ch;
+}
+
+.name {
+  font: 700 17px/1.3 var(--font-display);
+  color: var(--band-text);
+}
+
+.label {
+  font: 600 11px/1.6 var(--font-display);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--band-text);
+}
+
+/* The switches keep their own styles, with the colors of the band: its tokens redefined only in here */
+.controls {
+  --text: var(--band-text);
+  --muted: var(--band-muted);
+  --hover: rgb(255 255 255 / 10%);
+  --border-strong: rgb(255 255 255 / 25%);
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--band-text);
+}
+
+@media (max-width: 760px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

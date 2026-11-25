@@ -1,0 +1,127 @@
+.newUser {
+  gap: 12px;
+}
+
+.help {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.newFields {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.2fr) minmax(0, 0.8fr) auto;
+  gap: 12px;
+  align-items: start;
+}
+
+/* Lined up with the fields, under their labels */
+.newSubmit {
+  margin-top: 25px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.who {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.name {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.you {
+  font: 500 12px/1 var(--font-ui);
+  color: var(--muted);
+}
+
+.email {
+  font-size: 14px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.badge {
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  font: 600 12px/1.4 var(--font-ui);
+}
+
+.pending {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.loans {
+  font: 500 12.5px/1.6 var(--font-ui);
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.edit {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.editActions {
+  display: flex;
+  gap: 6px;
+  padding-bottom: 3px;
+}
+
+@media (max-width: 860px) {
+  .newFields {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .newSubmit {
+    margin-top: 0;
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .edit {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .newFields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

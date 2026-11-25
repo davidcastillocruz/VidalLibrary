@@ -1,0 +1,12 @@
+{
+  "dueOn": {
+    "ca": "Retorn",
+    "es": "Devolución",
+    "en": "Due"
+  },
+  "handOver": {
+    "ca": "Lliura",
+    "es": "Entrega",
+    "en": "Hand over"
+  }
+}

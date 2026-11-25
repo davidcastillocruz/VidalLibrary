@@ -1,0 +1,97 @@
+{
+  "back": {
+    "ca": "Torna al catàleg",
+    "es": "Vuelve al catálogo",
+    "en": "Back to the catalog"
+  },
+  "failed": {
+    "ca": "No hem pogut carregar aquesta obra. Torna-ho a provar d'aquí a una estona.",
+    "es": "No hemos podido cargar esta obra. Vuelve a intentarlo en un rato.",
+    "en": "We couldn't load this work. Try again in a while."
+  },
+  "author": {
+    "ca": "Autoria",
+    "es": "Autoría",
+    "en": "Author"
+  },
+  "director": {
+    "ca": "Direcció",
+    "es": "Dirección",
+    "en": "Director"
+  },
+  "designer": {
+    "ca": "Disseny",
+    "es": "Diseño",
+    "en": "Designer"
+  },
+  "year": {
+    "ca": "Any",
+    "es": "Año",
+    "en": "Year"
+  },
+  "language": {
+    "ca": "Llengua",
+    "es": "Idioma",
+    "en": "Language"
+  },
+  "copies": {
+    "ca": "Exemplars",
+    "es": "Ejemplares",
+    "en": "Copies"
+  },
+  "copiesFree": {
+    "ca": "{free} de {copies} lliures",
+    "es": "{free} de {copies} libres",
+    "en": "{free} of {copies} free"
+  },
+  "genres": {
+    "ca": "Gèneres",
+    "es": "Géneros",
+    "en": "Genres"
+  },
+  "reserveSection": {
+    "ca": "Reserva",
+    "es": "Reserva",
+    "en": "Reservation"
+  },
+  "available": {
+    "ca": "Hi ha exemplars lliures al prestatge",
+    "es": "Hay ejemplares libres en la estantería",
+    "en": "There are free copies on the shelf"
+  },
+  "unavailable": {
+    "ca": "Ara mateix tots els exemplars són en préstec",
+    "es": "Ahora mismo todos los ejemplares están prestados",
+    "en": "Right now every copy is on loan"
+  },
+  "signInToReserve": {
+    "ca": "Inicia la sessió per reservar",
+    "es": "Inicia sesión para reservar",
+    "en": "Sign in to reserve"
+  },
+  "reserve": {
+    "ca": "Reserva un exemplar",
+    "es": "Reserva un ejemplar",
+    "en": "Reserve a copy"
+  },
+  "hint": {
+    "ca": "T'esperarà 3 dies al taulell. Pots tenir fins a 3 préstecs alhora.",
+    "es": "Te esperará 3 días en el mostrador. Puedes tener hasta 3 préstamos a la vez.",
+    "en": "It waits 3 days for you at the desk. You can have up to 3 loans at once."
+  },
+  "seeLoans": {
+    "ca": "Mira els teus préstecs",
+    "es": "Mira tus préstamos",
+    "en": "See your loans"
+  },
+  "edit": {
+    "ca": "Edita l'obra",
+    "es": "Edita la obra",
+    "en": "Edit the work"
+  },
+  "loading": {
+    "ca": "S'està carregant",
+    "es": "Cargando",
+    "en": "Loading"
+  }
+}

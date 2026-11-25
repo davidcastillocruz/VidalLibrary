@@ -1,0 +1,12 @@
+{
+  "closed": {
+    "ca": "Has tancat la sessió",
+    "es": "Has cerrado la sesión",
+    "en": "You've signed out"
+  },
+  "failedTitle": {
+    "ca": "No s'ha tancat la sessió",
+    "es": "No se ha cerrado la sesión",
+    "en": "You're still signed in"
+  }
+}

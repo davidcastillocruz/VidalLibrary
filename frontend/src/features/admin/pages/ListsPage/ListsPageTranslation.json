@@ -1,0 +1,37 @@
+{
+  "title": {
+    "ca": "Gèneres i llengües",
+    "es": "Géneros e idiomas",
+    "en": "Genres and languages"
+  },
+  "lead": {
+    "ca": "Els filtres del catàleg. Eliminar-ne un no esborra cap obra: només deixa de tenir-lo.",
+    "es": "Los filtros del catálogo. Eliminar uno no borra ninguna obra: solo deja de tenerlo.",
+    "en": "The filters of the catalog. Deleting one deletes no work: the works just stop having it."
+  },
+  "failed": {
+    "ca": "No hem pogut carregar les llistes.",
+    "es": "No hemos podido cargar las listas.",
+    "en": "We couldn't load the lists."
+  },
+  "genresOf": {
+    "ca": "Gèneres de {kind}",
+    "es": "Géneros de {kind}",
+    "en": "Genres of {kind}"
+  },
+  "languages": {
+    "ca": "Llengües",
+    "es": "Idiomas",
+    "en": "Languages"
+  },
+  "deleteGenre": {
+    "ca": "Eliminar el gènere?",
+    "es": "¿Eliminar el género?",
+    "en": "Delete the genre?"
+  },
+  "deleteLanguage": {
+    "ca": "Eliminar la llengua?",
+    "es": "¿Eliminar el idioma?",
+    "en": "Delete the language?"
+  }
+}

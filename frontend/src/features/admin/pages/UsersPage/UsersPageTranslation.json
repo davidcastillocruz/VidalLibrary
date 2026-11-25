@@ -1,0 +1,167 @@
+{
+  "title": {
+    "ca": "Comptes",
+    "es": "Cuentas",
+    "en": "Accounts"
+  },
+  "lead": {
+    "ca": "Qui pot reservar i qui porta el taulell. No hi ha registre obert: els comptes es fan aquí.",
+    "es": "Quién puede reservar y quién lleva el mostrador. No hay registro abierto: las cuentas se crean aquí.",
+    "en": "Who can reserve and who runs the desk. There's no open sign-up: accounts are made here."
+  },
+  "newTitle": {
+    "ca": "Compte nou",
+    "es": "Cuenta nueva",
+    "en": "New account"
+  },
+  "newHelp": {
+    "ca": "Li enviarem una invitació per correu per triar la contrasenya. L'enllaç dura 7 dies.",
+    "es": "Le enviaremos una invitación por correo para elegir la contraseña. El enlace dura 7 días.",
+    "en": "We'll email an invitation to choose a password. The link lasts 7 days."
+  },
+  "email": {
+    "ca": "Correu electrònic",
+    "es": "Correo electrónico",
+    "en": "Email"
+  },
+  "name": {
+    "ca": "Nom",
+    "es": "Nombre",
+    "en": "Name"
+  },
+  "role": {
+    "ca": "Rol",
+    "es": "Rol",
+    "en": "Role"
+  },
+  "reader": {
+    "ca": "Lector",
+    "es": "Lector",
+    "en": "Reader"
+  },
+  "librarian": {
+    "ca": "Bibliotecari",
+    "es": "Bibliotecario",
+    "en": "Librarian"
+  },
+  "readers": {
+    "ca": "Lectors",
+    "es": "Lectores",
+    "en": "Readers"
+  },
+  "librarians": {
+    "ca": "Bibliotecaris",
+    "es": "Bibliotecarios",
+    "en": "Librarians"
+  },
+  "all": {
+    "ca": "Tots",
+    "es": "Todos",
+    "en": "All"
+  },
+  "invite": {
+    "ca": "Envia la invitació",
+    "es": "Envía la invitación",
+    "en": "Send the invitation"
+  },
+  "emailInvalid": {
+    "ca": "Escriu un correu com nom@exemple.cat",
+    "es": "Escribe un correo como nombre@ejemplo.es",
+    "en": "Write an email like name@example.com"
+  },
+  "nameMissing": {
+    "ca": "Escriu el nom",
+    "es": "Escribe el nombre",
+    "en": "Write the name"
+  },
+  "createFailed": {
+    "ca": "No s'ha creat el compte",
+    "es": "No se ha creado la cuenta",
+    "en": "The account wasn't created"
+  },
+  "search": {
+    "ca": "Cerca",
+    "es": "Buscar",
+    "en": "Search"
+  },
+  "searchPlaceholder": {
+    "ca": "Nom o correu",
+    "es": "Nombre o correo",
+    "en": "Name or email"
+  },
+  "failed": {
+    "ca": "No hem pogut carregar els comptes.",
+    "es": "No hemos podido cargar las cuentas.",
+    "en": "We couldn't load the accounts."
+  },
+  "empty": {
+    "ca": "Cap compte no coincideix amb la cerca.",
+    "es": "Ninguna cuenta coincide con la búsqueda.",
+    "en": "No account matches the search."
+  },
+  "you": {
+    "ca": "tu",
+    "es": "tú",
+    "en": "you"
+  },
+  "pending": {
+    "ca": "Sense activar",
+    "es": "Sin activar",
+    "en": "Not activated"
+  },
+  "loansOne": {
+    "ca": "1 préstec obert",
+    "es": "1 préstamo abierto",
+    "en": "1 open loan"
+  },
+  "loans": {
+    "ca": "{count} préstecs oberts",
+    "es": "{count} préstamos abiertos",
+    "en": "{count} open loans"
+  },
+  "resend": {
+    "ca": "Torna a convidar",
+    "es": "Vuelve a invitar",
+    "en": "Invite again"
+  },
+  "inviteFailed": {
+    "ca": "No s'ha enviat la invitació",
+    "es": "No se ha enviado la invitación",
+    "en": "The invitation wasn't sent"
+  },
+  "edit": {
+    "ca": "Edita {name}",
+    "es": "Edita {name}",
+    "en": "Edit {name}"
+  },
+  "save": {
+    "ca": "Desa",
+    "es": "Guarda",
+    "en": "Save"
+  },
+  "cancel": {
+    "ca": "Cancel·la",
+    "es": "Cancela",
+    "en": "Cancel"
+  },
+  "saveFailed": {
+    "ca": "No s'ha desat el compte",
+    "es": "No se ha guardado la cuenta",
+    "en": "The account wasn't saved"
+  },
+  "delete": {
+    "ca": "Elimina {name}",
+    "es": "Elimina {name}",
+    "en": "Delete {name}"
+  },
+  "deleteQuestion": {
+    "ca": "Eliminar el compte?",
+    "es": "¿Eliminar la cuenta?",
+    "en": "Delete the account?"
+  },
+  "deleteFailed": {
+    "ca": "No s'ha eliminat el compte",
+    "es": "No se ha eliminado la cuenta",
+    "en": "The account wasn't deleted"
+  }
+}

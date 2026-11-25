@@ -1,0 +1,102 @@
+/* 2:3 like a book standing on its shelf; every kind keeps it, so a grid of mixed works stays even */
+.cover {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 3px 6px 6px 3px;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow:
+    0 1px 1px rgb(0 0 0 / 8%),
+    0 6px 16px -6px rgb(0 0 0 / 30%);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.drawn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16% 12% 12%;
+  color: #f6efe2;
+  background: var(--cloth);
+  container-type: inline-size;
+}
+
+.title {
+  font: 600 clamp(13px, 11cqi, 30px) / 1.08 var(--font-display);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.creator {
+  font: 500 clamp(9px, 6cqi, 15px) / 1.3 var(--font-ui);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.82;
+}
+
+/* A book: the hinge of the binding on the left, and two gilt rules framing the page, above the title and under the
+   author */
+.book.drawn {
+  padding: 18% 12% 15% 18%;
+  background:
+    linear-gradient(90deg, rgb(0 0 0 / 28%) 0 4%, rgb(255 255 255 / 10%) 4% 5%, transparent 5%),
+    linear-gradient(#d9b86a, #d9b86a) 55% 9% / 74% 1px no-repeat,
+    linear-gradient(#d9b86a, #d9b86a) 55% 93% / 74% 1px no-repeat,
+    var(--cloth);
+}
+
+/* A film: a dark poster, the color only as a glow from below */
+.film.drawn {
+  background:
+    radial-gradient(120% 70% at 50% 110%, var(--cloth), transparent 70%),
+    #14110e;
+  justify-content: flex-end;
+  gap: 8px;
+  text-align: center;
+  align-items: center;
+}
+
+.film .title {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* A board game: the lid of a box, a band of color across it */
+.board_game.drawn {
+  background:
+    linear-gradient(transparent 58%, rgb(0 0 0 / 22%) 58% 60%, var(--cloth) 60%),
+    color-mix(in srgb, var(--cloth) 70%, #f6efe2);
+  color: #1d1712;
+}
+
+.board_game .creator {
+  color: #f6efe2;
+  opacity: 0.95;
+}
+
+.small .title {
+  -webkit-line-clamp: 3;
+}
+
+/* In the rows of a list it is a thumbnail: too small to read a title, only its cloth and rules show */
+.tiny .title,
+.tiny .creator {
+  display: none;
+}
+
+.tiny {
+  border-radius: 2px 4px 4px 2px;
+}

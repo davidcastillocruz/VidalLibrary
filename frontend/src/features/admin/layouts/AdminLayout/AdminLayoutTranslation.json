@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "ca": "Seccions de la gestió",
+    "es": "Secciones de la gestión",
+    "en": "Management sections"
+  },
+  "loans": {
+    "ca": "Taulell",
+    "es": "Mostrador",
+    "en": "Desk"
+  },
+  "catalog": {
+    "ca": "Catàleg",
+    "es": "Catálogo",
+    "en": "Catalog"
+  },
+  "lists": {
+    "ca": "Gèneres i llengües",
+    "es": "Géneros e idiomas",
+    "en": "Genres and languages"
+  },
+  "users": {
+    "ca": "Comptes",
+    "es": "Cuentas",
+    "en": "Accounts"
+  }
+}

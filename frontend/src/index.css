@@ -1,15 +1,32 @@
 /* Global base styles, the colors come from themes/themes.css */
 
-/* Archivo with its width axis: condensed for the board, wide for the titles */
-@import '@fontsource-variable/archivo/wdth.css';
+/* The type of the institute: Poppins for the titles and the labels, Lato for the text */
+@import '@fontsource/poppins/500.css';
+@import '@fontsource/poppins/600.css';
+@import '@fontsource/poppins/700.css';
+@import '@fontsource/lato/400.css';
+@import '@fontsource/lato/700.css';
 
 /* Before the JavaScript sets the theme, the browser's own colors follow the system */
 :root {
   color-scheme: light dark;
-  --font: 'Archivo Variable', system-ui, sans-serif;
+  --font-display: 'Poppins', system-ui, sans-serif;
+  --font-ui: 'Lato', system-ui, sans-serif;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 18px;
+  --radius-full: 999px;
   /* Strong ease-out for things entering, ease-in-out for things moving on screen */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-press: 140ms;
+  --dur-hover: 150ms;
+  --dur-popover: 200ms;
+  --dur-toast: 260ms;
+  --page-width: 1180px;
+  --page-gutter: max(20px, env(safe-area-inset-left, 0px));
+  --header-height: 68px;
 }
 
 *,
@@ -25,16 +42,32 @@ body {
 }
 
 body {
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font);
-  font-size: 17px;
-  line-height: 1.55;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 16.5px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  scrollbar-color: var(--color-border) var(--color-bg);
+  scrollbar-color: var(--border-strong) var(--bg);
 }
 
-/* Visible only to screen readers: real text next to visual pieces like the departures board */
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  color: var(--heading);
+  text-wrap: balance;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* Visible only to screen readers */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -45,24 +78,39 @@ body {
 }
 
 ::selection {
-  background: var(--color-primary);
-  color: var(--color-primary-text);
+  background: var(--accent-soft);
+  color: var(--text);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-text);
+  outline: 2px solid var(--accent-text);
   outline-offset: 3px;
 }
 
 a {
-  color: inherit;
+  color: var(--link);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
 }
 
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
   color: inherit;
+}
+
+/* The caret in the blue of the institute, in every field */
+input,
+textarea {
+  caret-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 1ms !important;
+  }
 }

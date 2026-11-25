@@ -1,0 +1,32 @@
+{
+  "book": {
+    "ca": "Llibre",
+    "es": "Libro",
+    "en": "Book"
+  },
+  "film": {
+    "ca": "Pel·lícula",
+    "es": "Película",
+    "en": "Film"
+  },
+  "board_game": {
+    "ca": "Joc de taula",
+    "es": "Juego de mesa",
+    "en": "Board game"
+  },
+  "books": {
+    "ca": "Llibres",
+    "es": "Libros",
+    "en": "Books"
+  },
+  "films": {
+    "ca": "Pel·lícules",
+    "es": "Películas",
+    "en": "Films"
+  },
+  "board_games": {
+    "ca": "Jocs de taula",
+    "es": "Juegos de mesa",
+    "en": "Board games"
+  }
+}

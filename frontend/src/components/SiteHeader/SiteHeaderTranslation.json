@@ -1,0 +1,42 @@
+{
+  "school": {
+    "ca": "Institut F. Vidal i Barraquer",
+    "es": "Instituto F. Vidal i Barraquer",
+    "en": "Institut F. Vidal i Barraquer"
+  },
+  "library": {
+    "ca": "Biblioteca",
+    "es": "Biblioteca",
+    "en": "Library"
+  },
+  "sections": {
+    "ca": "Seccions",
+    "es": "Secciones",
+    "en": "Sections"
+  },
+  "catalog": {
+    "ca": "Catàleg",
+    "es": "Catálogo",
+    "en": "Catalog"
+  },
+  "loans": {
+    "ca": "Els meus préstecs",
+    "es": "Mis préstamos",
+    "en": "My loans"
+  },
+  "admin": {
+    "ca": "Gestió",
+    "es": "Gestión",
+    "en": "Management"
+  },
+  "signIn": {
+    "ca": "Inicia la sessió",
+    "es": "Inicia sesión",
+    "en": "Sign in"
+  },
+  "signOut": {
+    "ca": "Tanca la sessió",
+    "es": "Cierra la sesión",
+    "en": "Sign out"
+  }
+}

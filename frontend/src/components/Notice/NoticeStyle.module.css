@@ -1,0 +1,86 @@
+/* The toast of the style guide, placed in the page: an icon on its soft color, the title and one line */
+.notice {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 11px 12px;
+  border-radius: var(--radius-lg);
+  background: var(--raised);
+  border: 1px solid var(--border);
+  animation: enter var(--dur-popover) var(--ease-out);
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.icon svg {
+  stroke-width: 2.6;
+}
+
+.error .icon {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.success .icon {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.info .icon,
+.mail .icon {
+  background: var(--info-soft);
+  color: var(--info);
+}
+
+.body {
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.title {
+  margin: 0 0 2px;
+  font: 600 13.5px/1.35 var(--font-ui);
+}
+
+.text {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.title + .text {
+  margin-top: 2px;
+}
+
+/* A message that has no title says everything in its text, in the color of the text */
+.body > .text:only-child {
+  color: var(--text);
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notice {
+    animation-name: fade;
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
+}

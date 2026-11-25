@@ -1,0 +1,67 @@
+{
+  "title": {
+    "ca": "Els meus préstecs",
+    "es": "Mis préstamos",
+    "en": "My loans"
+  },
+  "quota": {
+    "ca": "{open} de {max} préstecs oberts",
+    "es": "{open} de {max} préstamos abiertos",
+    "en": "{open} of {max} open loans"
+  },
+  "failed": {
+    "ca": "No hem pogut carregar els teus préstecs. Torna-ho a provar d'aquí a una estona.",
+    "es": "No hemos podido cargar tus préstamos. Vuelve a intentarlo en un rato.",
+    "en": "We couldn't load your loans. Try again in a while."
+  },
+  "emptyTitle": {
+    "ca": "Encara no has demanat res",
+    "es": "Aún no has pedido nada",
+    "en": "You haven't borrowed anything yet"
+  },
+  "empty": {
+    "ca": "Quan reservis una obra del catàleg, la trobaràs aquí.",
+    "es": "Cuando reserves una obra del catálogo, la encontrarás aquí.",
+    "en": "When you reserve a work from the catalog, you'll find it here."
+  },
+  "browse": {
+    "ca": "Explora el catàleg",
+    "es": "Explora el catálogo",
+    "en": "Browse the catalog"
+  },
+  "requested": {
+    "ca": "Per recollir",
+    "es": "Por recoger",
+    "en": "To pick up"
+  },
+  "requestedNote": {
+    "ca": "Passa pel taulell amb el teu nom: si no el reculls a temps, la reserva s'anul·la sola.",
+    "es": "Pasa por el mostrador con tu nombre: si no lo recoges a tiempo, la reserva se anula sola.",
+    "en": "Come to the desk with your name: if it isn't picked up in time, the reservation cancels itself."
+  },
+  "cancel": {
+    "ca": "Anul·la la reserva",
+    "es": "Anula la reserva",
+    "en": "Cancel the reservation"
+  },
+  "cancelFailed": {
+    "ca": "No s'ha anul·lat la reserva",
+    "es": "No se ha anulado la reserva",
+    "en": "The reservation wasn't cancelled"
+  },
+  "active": {
+    "ca": "A casa",
+    "es": "En casa",
+    "en": "At home"
+  },
+  "history": {
+    "ca": "Historial",
+    "es": "Historial",
+    "en": "History"
+  },
+  "loading": {
+    "ca": "S'està carregant",
+    "es": "Cargando",
+    "en": "Loading"
+  }
+}

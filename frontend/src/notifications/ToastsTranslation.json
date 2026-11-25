@@ -1,0 +1,12 @@
+{
+  "region": {
+    "ca": "Notificacions",
+    "es": "Notificaciones",
+    "en": "Notifications"
+  },
+  "close": {
+    "ca": "Tancar la notificació",
+    "es": "Cerrar la notificación",
+    "en": "Close the notification"
+  }
+}

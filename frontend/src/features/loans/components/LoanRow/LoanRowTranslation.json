@@ -1,0 +1,27 @@
+{
+  "pickUntil": {
+    "ca": "Reservat · recull-lo fins al {day}",
+    "es": "Reservado · recógelo hasta el {day}",
+    "en": "Reserved · pick it up by {day}"
+  },
+  "dueOn": {
+    "ca": "En préstec · torna'l com a tard el {day}",
+    "es": "Prestado · devuélvelo como tarde el {day}",
+    "en": "On loan · bring it back by {day}"
+  },
+  "overdue": {
+    "ca": "Vençut · s'havia de tornar el {day}",
+    "es": "Vencido · tenía que devolverse el {day}",
+    "en": "Overdue · was due on {day}"
+  },
+  "returned": {
+    "ca": "Retornat el {day}",
+    "es": "Devuelto el {day}",
+    "en": "Returned on {day}"
+  },
+  "cancelled": {
+    "ca": "Anul·lat el {day}",
+    "es": "Anulado el {day}",
+    "en": "Cancelled on {day}"
+  }
+}

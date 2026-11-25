@@ -1,0 +1,17 @@
+{
+  "freeOne": {
+    "ca": "1 exemplar lliure",
+    "es": "1 ejemplar libre",
+    "en": "1 copy free"
+  },
+  "free": {
+    "ca": "{count} exemplars lliures",
+    "es": "{count} ejemplares libres",
+    "en": "{count} copies free"
+  },
+  "out": {
+    "ca": "Tots en préstec",
+    "es": "Todos prestados",
+    "en": "All on loan"
+  }
+}

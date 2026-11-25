@@ -1,0 +1,180 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--raised);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-1);
+}
+
+/* The band of the institute above everything, as on its website */
+.band {
+  background: var(--band-deep);
+  color: var(--band-muted);
+}
+
+.bandInner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter);
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font: 600 11px/1 var(--font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.school {
+  color: var(--band-text);
+  text-decoration: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .school:hover {
+    text-decoration: underline;
+  }
+}
+
+.inner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 0 var(--page-gutter);
+  min-height: var(--header-height);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--heading);
+  text-decoration: none;
+  flex: none;
+}
+
+.mark {
+  width: 32px;
+  height: 32px;
+  fill: var(--accent);
+  stroke: var(--accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.mark rect {
+  stroke: none;
+}
+
+.mark rect:nth-child(2) {
+  fill: var(--signal);
+}
+
+.name {
+  display: grid;
+  font: 700 19px/1.05 var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.small {
+  font: 600 10.5px/1.4 var(--font-display);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.nav {
+  display: flex;
+  gap: 2px;
+  min-width: 0;
+  align-self: stretch;
+}
+
+/* The sections in uppercase, like the menu of the institute; the open one with a bar of its blue under it */
+.link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  font: 600 13px/1 var(--font-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--dur-hover) ease;
+}
+
+.active {
+  color: var(--heading);
+}
+
+.active::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: -1px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--accent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    color: var(--heading);
+  }
+}
+
+.session {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 500 14px/1 var(--font-display);
+  color: var(--muted);
+  max-width: 200px;
+}
+
+.whoName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* On a phone the sections go to a second row, scrolling sideways if they don't fit */
+@media (max-width: 760px) {
+  .city {
+    display: none;
+  }
+
+  .inner {
+    flex-wrap: wrap;
+    gap: 0 12px;
+    padding-top: 10px;
+  }
+
+  .nav {
+    order: 3;
+    width: calc(100% + 2 * var(--page-gutter));
+    margin: 4px calc(-1 * var(--page-gutter)) 0;
+    padding: 0 calc(var(--page-gutter) - 14px);
+    height: 44px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .who {
+    display: none;
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": {
+    "ca": "Biblioteca Vidal i Barraquer",
+    "es": "Biblioteca Vidal i Barraquer",
+    "en": "Vidal i Barraquer Library"
+  },
+  "rules": {
+    "ca": "Llibres, pel·lícules i jocs de taula. Fins a 3 préstecs alhora; una reserva t'espera 3 dies al taulell.",
+    "es": "Libros, películas y juegos de mesa. Hasta 3 préstamos a la vez; una reserva te espera 3 días en el mostrador.",
+    "en": "Books, films and board games. Up to 3 loans at once; a reservation waits 3 days for you at the desk."
+  },
+  "where": {
+    "ca": "On som",
+    "es": "Dónde estamos",
+    "en": "Where we are"
+  }
+}

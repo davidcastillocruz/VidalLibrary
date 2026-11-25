@@ -1,0 +1,30 @@
+.root {
+  display: inline-flex;
+}
+
+.ask {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  animation: enter var(--dur-popover) var(--ease-out);
+}
+
+.question {
+  font: 600 13.5px/1.3 var(--font-ui);
+  margin-right: 4px;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+}
+
+/* Without motion the question just appears */
+@media (prefers-reduced-motion: reduce) {
+  .ask {
+    animation: none;
+  }
+}

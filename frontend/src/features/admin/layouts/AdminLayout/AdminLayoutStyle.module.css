@@ -1,0 +1,55 @@
+.admin {
+  display: grid;
+  gap: 32px;
+}
+
+.header {
+  display: grid;
+  gap: 12px;
+}
+
+
+/* The sections as a row of pills on a strip of the surface */
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  flex-wrap: wrap;
+  width: fit-content;
+  max-width: 100%;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+}
+
+.tab {
+  padding: 9px 15px;
+  border-radius: var(--radius-md);
+  font: 600 13px/1 var(--font-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color var(--dur-hover) ease, background-color var(--dur-hover) ease;
+}
+
+.active {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: var(--shadow-btn);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tab:not(.active):hover {
+    color: var(--text);
+  }
+}
+
+/* On a touch screen every control is at least 44px tall: a finger isn't a pointer */
+@media (pointer: coarse) {
+  .tab {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "unexpected": {
+    "ca": "Alguna cosa ha fallat per part nostra. Torna-ho a provar d'aquí a uns minuts.",
+    "es": "Algo ha fallado por nuestra parte. Vuelve a intentarlo en unos minutos.",
+    "en": "Something went wrong on our side. Try again in a few minutes."
+  },
+  "noConnection": {
+    "ca": "No hem pogut connectar amb la biblioteca. Revisa la connexió i torna-ho a provar.",
+    "es": "No hemos podido conectar con la biblioteca. Revisa tu conexión y vuelve a intentarlo.",
+    "en": "We couldn't reach the library. Check your connection and try again."
+  }
+}

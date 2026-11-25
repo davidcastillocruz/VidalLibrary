@@ -1,0 +1,112 @@
+{
+  "pageTitle": {
+    "ca": "Catàleg · Biblioteca Vidal i Barraquer",
+    "es": "Catálogo · Biblioteca Vidal i Barraquer",
+    "en": "Catalog · Vidal i Barraquer Library"
+  },
+  "title": {
+    "ca": "Tria què t'emportes a casa",
+    "es": "Elige qué te llevas a casa",
+    "en": "Choose what you take home"
+  },
+  "lead": {
+    "ca": "Reserva un llibre, una pel·lícula o un joc de taula i passa a recollir-lo al taulell en 3 dies.",
+    "es": "Reserva un libro, una película o un juego de mesa y pasa a recogerlo al mostrador en 3 días.",
+    "en": "Reserve a book, a film or a board game and pick it up at the desk within 3 days."
+  },
+  "kinds": {
+    "ca": "Tipus d'obra",
+    "es": "Tipo de obra",
+    "en": "Kind of work"
+  },
+  "all": {
+    "ca": "Tot",
+    "es": "Todo",
+    "en": "Everything"
+  },
+  "search": {
+    "ca": "Cerca",
+    "es": "Buscar",
+    "en": "Search"
+  },
+  "searchPlaceholder": {
+    "ca": "Títol o autor",
+    "es": "Título o autor",
+    "en": "Title or author"
+  },
+  "genre": {
+    "ca": "Gènere",
+    "es": "Género",
+    "en": "Genre"
+  },
+  "anyGenre": {
+    "ca": "Tots els gèneres",
+    "es": "Todos los géneros",
+    "en": "Every genre"
+  },
+  "language": {
+    "ca": "Llengua",
+    "es": "Idioma",
+    "en": "Language"
+  },
+  "anyLanguage": {
+    "ca": "Totes les llengües",
+    "es": "Todos los idiomas",
+    "en": "Every language"
+  },
+  "sort": {
+    "ca": "Ordre",
+    "es": "Orden",
+    "en": "Order"
+  },
+  "byTitle": {
+    "ca": "Per títol",
+    "es": "Por título",
+    "en": "By title"
+  },
+  "byNewest": {
+    "ca": "Arribats fa poc",
+    "es": "Llegados hace poco",
+    "en": "Recently added"
+  },
+  "byYear": {
+    "ca": "Per any",
+    "es": "Por año",
+    "en": "By year"
+  },
+  "countOne": {
+    "ca": "1 obra",
+    "es": "1 obra",
+    "en": "1 work"
+  },
+  "count": {
+    "ca": "{count} obres",
+    "es": "{count} obras",
+    "en": "{count} works"
+  },
+  "failed": {
+    "ca": "No hem pogut carregar el catàleg. Torna-ho a provar d'aquí a una estona.",
+    "es": "No hemos podido cargar el catálogo. Vuelve a intentarlo en un rato.",
+    "en": "We couldn't load the catalog. Try again in a while."
+  },
+  "emptyTitle": {
+    "ca": "Aquest prestatge és buit",
+    "es": "Esta estantería está vacía",
+    "en": "This shelf is empty"
+  },
+  "emptyFiltered": {
+    "ca": "Cap obra no coincideix amb la cerca. Prova amb menys paraules o un altre filtre.",
+    "es": "Ninguna obra coincide con la búsqueda. Prueba con menos palabras u otro filtro.",
+    "en": "No work matches the search. Try fewer words or another filter."
+  },
+  "empty": {
+    "ca": "Encara no hi ha cap obra d'aquest tipus al catàleg.",
+    "es": "Aún no hay ninguna obra de este tipo en el catálogo.",
+    "en": "There are no works of this kind in the catalog yet."
+  },
+  "loading": {
+    "ca": "S'està carregant",
+    "es": "Cargando",
+    "en": "Loading"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "title": {
+    "ca": "Taulell de préstecs",
+    "es": "Mostrador de préstamos",
+    "en": "Loan desk"
+  },
+  "lead": {
+    "ca": "Primer les reserves que esperen, després els préstecs pel dia que s'han de tornar.",
+    "es": "Primero las reservas que esperan, después los préstamos por el día que hay que devolverlos.",
+    "en": "The reservations waiting first, then the loans by the day they are due."
+  },
+  "search": {
+    "ca": "Cerca",
+    "es": "Buscar",
+    "en": "Search"
+  },
+  "searchPlaceholder": {
+    "ca": "Lector, correu o títol",
+    "es": "Lector, correo o título",
+    "en": "Reader, email or title"
+  },
+  "show": {
+    "ca": "Quins préstecs",
+    "es": "Qué préstamos",
+    "en": "Which loans"
+  },
+  "open": {
+    "ca": "Oberts",
+    "es": "Abiertos",
+    "en": "Open"
+  },
+  "requested": {
+    "ca": "Per lliurar",
+    "es": "Por entregar",
+    "en": "To hand over"
+  },
+  "active": {
+    "ca": "En préstec",
+    "es": "Prestados",
+    "en": "On loan"
+  },
+  "overdue": {
+    "ca": "Vençuts",
+    "es": "Vencidos",
+    "en": "Overdue"
+  },
+  "all": {
+    "ca": "Tots",
+    "es": "Todos",
+    "en": "All"
+  },
+  "failed": {
+    "ca": "No hem pogut carregar els préstecs.",
+    "es": "No hemos podido cargar los préstamos.",
+    "en": "We couldn't load the loans."
+  },
+  "empty": {
+    "ca": "No hi ha cap préstec aquí. Bona feina!",
+    "es": "No hay ningún préstamo aquí. ¡Buen trabajo!",
+    "en": "No loans here. Nice work!"
+  },
+  "cancel": {
+    "ca": "Anul·la",
+    "es": "Anula",
+    "en": "Cancel"
+  },
+  "cancelQuestion": {
+    "ca": "Anul·lar la reserva?",
+    "es": "¿Anular la reserva?",
+    "en": "Cancel the reservation?"
+  },
+  "return": {
+    "ca": "Retornat",
+    "es": "Devuelto",
+    "en": "Returned"
+  },
+  "pickupFailed": {
+    "ca": "No s'ha lliurat el préstec",
+    "es": "No se ha entregado el préstamo",
+    "en": "The loan wasn't handed over"
+  },
+  "returnFailed": {
+    "ca": "No s'ha registrat el retorn",
+    "es": "No se ha registrado la devolución",
+    "en": "The return wasn't saved"
+  },
+  "cancelFailed": {
+    "ca": "No s'ha anul·lat la reserva",
+    "es": "No se ha anulado la reserva",
+    "en": "The reservation wasn't cancelled"
+  },
+  "countOne": {
+    "ca": "1 préstec",
+    "es": "1 préstamo",
+    "en": "1 loan"
+  },
+  "count": {
+    "ca": "{count} préstecs",
+    "es": "{count} préstamos",
+    "en": "{count} loans"
+  }
+}

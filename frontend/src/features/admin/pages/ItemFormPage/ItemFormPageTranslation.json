@@ -1,0 +1,147 @@
+{
+  "back": {
+    "ca": "Catàleg",
+    "es": "Catálogo",
+    "en": "Catalog"
+  },
+  "newTitle": {
+    "ca": "Obra nova",
+    "es": "Obra nueva",
+    "en": "New work"
+  },
+  "view": {
+    "ca": "Mira-la al catàleg",
+    "es": "Mírala en el catálogo",
+    "en": "See it in the catalog"
+  },
+  "loadFailed": {
+    "ca": "No hem pogut carregar aquesta obra.",
+    "es": "No hemos podido cargar esta obra.",
+    "en": "We couldn't load this work."
+  },
+  "kind": {
+    "ca": "Tipus d'obra",
+    "es": "Tipo de obra",
+    "en": "Kind of work"
+  },
+  "titleLabel": {
+    "ca": "Títol",
+    "es": "Título",
+    "en": "Title"
+  },
+  "creator_book": {
+    "ca": "Autoria",
+    "es": "Autoría",
+    "en": "Author"
+  },
+  "creator_film": {
+    "ca": "Direcció",
+    "es": "Dirección",
+    "en": "Director"
+  },
+  "creator_board_game": {
+    "ca": "Disseny",
+    "es": "Diseño",
+    "en": "Designer"
+  },
+  "year": {
+    "ca": "Any",
+    "es": "Año",
+    "en": "Year"
+  },
+  "copies": {
+    "ca": "Exemplars",
+    "es": "Ejemplares",
+    "en": "Copies"
+  },
+  "language": {
+    "ca": "Llengua",
+    "es": "Idioma",
+    "en": "Language"
+  },
+  "noLanguage": {
+    "ca": "Sense llengua",
+    "es": "Sin idioma",
+    "en": "No language"
+  },
+  "genres": {
+    "ca": "Gèneres",
+    "es": "Géneros",
+    "en": "Genres"
+  },
+  "noGenres": {
+    "ca": "Aquest tipus encara no té gèneres: crea'ls a Gèneres i llengües.",
+    "es": "Este tipo aún no tiene géneros: créalos en Géneros e idiomas.",
+    "en": "This kind has no genres yet: create them in Genres and languages."
+  },
+  "synopsis": {
+    "ca": "Sinopsi",
+    "es": "Sinopsis",
+    "en": "Synopsis"
+  },
+  "save": {
+    "ca": "Desa els canvis",
+    "es": "Guarda los cambios",
+    "en": "Save the changes"
+  },
+  "create": {
+    "ca": "Afegeix al catàleg",
+    "es": "Añade al catálogo",
+    "en": "Add to the catalog"
+  },
+  "required": {
+    "ca": "No pot quedar buit",
+    "es": "No puede quedar vacío",
+    "en": "It can't be empty"
+  },
+  "yearInvalid": {
+    "ca": "Un any entre {min} i {max}",
+    "es": "Un año entre {min} y {max}",
+    "en": "A year between {min} and {max}"
+  },
+  "copiesInvalid": {
+    "ca": "Entre 1 i {max} exemplars",
+    "es": "Entre 1 y {max} ejemplares",
+    "en": "Between 1 and {max} copies"
+  },
+  "tooManyGenres": {
+    "ca": "Com a màxim {max} gèneres",
+    "es": "Como máximo {max} géneros",
+    "en": "At most {max} genres"
+  },
+  "cover": {
+    "ca": "Portada",
+    "es": "Portada",
+    "en": "Cover"
+  },
+  "coverLater": {
+    "ca": "La portada s'hi pot afegir un cop l'obra és al catàleg.",
+    "es": "La portada se puede añadir cuando la obra ya está en el catálogo.",
+    "en": "The cover can be added once the work is in the catalog."
+  },
+  "danger": {
+    "ca": "Eliminar l'obra",
+    "es": "Eliminar la obra",
+    "en": "Delete the work"
+  },
+  "deleteHelp": {
+    "ca": "Desapareix del catàleg amb el seu historial. No es pot si té préstecs oberts.",
+    "es": "Desaparece del catálogo con su historial. No se puede si tiene préstamos abiertos.",
+    "en": "It leaves the catalog with its history. Not possible while it has open loans."
+  },
+  "delete": {
+    "ca": "Elimina l'obra",
+    "es": "Elimina la obra",
+    "en": "Delete the work"
+  },
+  "deleteQuestion": {
+    "ca": "Eliminar-la per sempre?",
+    "es": "¿Eliminarla para siempre?",
+    "en": "Delete it for good?"
+  },
+  "deleteFailed": {
+    "ca": "No s'ha eliminat l'obra",
+    "es": "No se ha eliminado la obra",
+    "en": "The work wasn't deleted"
+  }
+}

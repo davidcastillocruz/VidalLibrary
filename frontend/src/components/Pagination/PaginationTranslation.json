@@ -1,0 +1,22 @@
+{
+  "label": {
+    "ca": "Pàgines",
+    "es": "Páginas",
+    "en": "Pages"
+  },
+  "previous": {
+    "ca": "Anterior",
+    "es": "Anterior",
+    "en": "Previous"
+  },
+  "next": {
+    "ca": "Següent",
+    "es": "Siguiente",
+    "en": "Next"
+  },
+  "where": {
+    "ca": "Pàgina {page} de {pages}",
+    "es": "Página {page} de {pages}",
+    "en": "Page {page} of {pages}"
+  }
+}

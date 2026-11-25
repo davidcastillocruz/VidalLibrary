@@ -1,0 +1,80 @@
+.list {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  background: var(--raised);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-1);
+  min-width: 0;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.entries {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 48px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.none {
+  padding: 12px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.name {
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.inline {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.input {
+  flex: 1 1 140px;
+  min-width: 0;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--input-bg);
+  font-size: 14.5px;
+}
+
+.input:focus-visible {
+  outline: none;
+  border-color: var(--accent-text);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+/* On a touch screen every control is at least 44px tall: a finger isn't a pointer */
+@media (pointer: coarse) {
+  .input {
+    height: 44px;
+  }
+}

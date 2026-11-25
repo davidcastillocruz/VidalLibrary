@@ -1,17 +1,28 @@
 .page {
   display: grid;
-  min-height: 100dvh;
-  place-content: center;
-  gap: 16px;
-  padding-inline: 16px;
+  justify-items: center;
   text-align: center;
+  gap: 14px;
+  padding: 48px 0;
 }
 
-.title,
-.text {
-  margin: 0;
+/* The call number on a spine label */
+.mark {
+  font: 600 15px/1 var(--font-ui);
+  letter-spacing: 0.2em;
+  padding: 8px 14px;
+  border: 1.5px solid var(--text);
+  border-radius: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.title {
+  font-size: clamp(30px, 4.4vw, 44px);
+  max-width: 18ch;
 }
 
 .text {
+  color: var(--muted);
   overflow-wrap: anywhere;
+  margin-bottom: 8px;
 }

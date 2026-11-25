@@ -1,0 +1,42 @@
+{
+  "title": {
+    "ca": "Inicia la sessió",
+    "es": "Inicia sesión",
+    "en": "Sign in"
+  },
+  "lead": {
+    "ca": "Amb el correu i la contrasenya del teu compte de la biblioteca. Si encara no en tens, demana'l al taulell.",
+    "es": "Con el correo y la contraseña de tu cuenta de la biblioteca. Si aún no tienes, pídela en el mostrador.",
+    "en": "With the email and the password of your library account. If you don't have one yet, ask at the desk."
+  },
+  "email": {
+    "ca": "Correu electrònic",
+    "es": "Correo electrónico",
+    "en": "Email"
+  },
+  "password": {
+    "ca": "Contrasenya",
+    "es": "Contraseña",
+    "en": "Password"
+  },
+  "forgot": {
+    "ca": "L'has oblidada?",
+    "es": "¿La has olvidado?",
+    "en": "Forgot it?"
+  },
+  "submit": {
+    "ca": "Entra",
+    "es": "Entra",
+    "en": "Sign in"
+  },
+  "emailInvalid": {
+    "ca": "Escriu un correu com nom@exemple.cat",
+    "es": "Escribe un correo como nombre@ejemplo.es",
+    "en": "Write an email like name@example.com"
+  },
+  "passwordMissing": {
+    "ca": "Escriu la contrasenya",
+    "es": "Escribe la contraseña",
+    "en": "Write the password"
+  }
+}

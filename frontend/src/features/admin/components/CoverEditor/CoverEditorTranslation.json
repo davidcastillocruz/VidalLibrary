@@ -1,0 +1,42 @@
+{
+  "add": {
+    "ca": "Afegeix una portada",
+    "es": "Añade una portada",
+    "en": "Add a cover"
+  },
+  "change": {
+    "ca": "Canvia la portada",
+    "es": "Cambia la portada",
+    "en": "Change the cover"
+  },
+  "remove": {
+    "ca": "Treu-la",
+    "es": "Quítala",
+    "en": "Remove it"
+  },
+  "removeQuestion": {
+    "ca": "Treure la portada?",
+    "es": "¿Quitar la portada?",
+    "en": "Remove the cover?"
+  },
+  "help": {
+    "ca": "PNG, JPEG o WebP de fins a 5 MB. Sense portada, se'n dibuixa una amb el títol.",
+    "es": "PNG, JPEG o WebP de hasta 5 MB. Sin portada, se dibuja una con el título.",
+    "en": "PNG, JPEG or WebP up to 5 MB. Without one, a cover is drawn from the title."
+  },
+  "invalid": {
+    "ca": "Tria una imatge PNG, JPEG o WebP de fins a 5 MB.",
+    "es": "Elige una imagen PNG, JPEG o WebP de hasta 5 MB.",
+    "en": "Choose a PNG, JPEG or WebP image up to 5 MB."
+  },
+  "failed": {
+    "ca": "No s'ha desat la portada",
+    "es": "No se ha guardado la portada",
+    "en": "The cover wasn't saved"
+  },
+  "removeFailed": {
+    "ca": "No s'ha tret la portada",
+    "es": "No se ha quitado la portada",
+    "en": "The cover wasn't removed"
+  }
+}

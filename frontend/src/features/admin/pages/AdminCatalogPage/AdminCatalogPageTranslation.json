@@ -1,0 +1,57 @@
+{
+  "title": {
+    "ca": "Catàleg",
+    "es": "Catálogo",
+    "en": "Catalog"
+  },
+  "lead": {
+    "ca": "Les obres de la biblioteca, les últimes arribades primer.",
+    "es": "Las obras de la biblioteca, las últimas llegadas primero.",
+    "en": "The works of the library, the latest arrivals first."
+  },
+  "add": {
+    "ca": "Afegeix una obra",
+    "es": "Añade una obra",
+    "en": "Add a work"
+  },
+  "search": {
+    "ca": "Cerca",
+    "es": "Buscar",
+    "en": "Search"
+  },
+  "searchPlaceholder": {
+    "ca": "Títol o autor",
+    "es": "Título o autor",
+    "en": "Title or author"
+  },
+  "kind": {
+    "ca": "Tipus d'obra",
+    "es": "Tipo de obra",
+    "en": "Kind of work"
+  },
+  "all": {
+    "ca": "Tot",
+    "es": "Todo",
+    "en": "Everything"
+  },
+  "failed": {
+    "ca": "No hem pogut carregar el catàleg.",
+    "es": "No hemos podido cargar el catálogo.",
+    "en": "We couldn't load the catalog."
+  },
+  "empty": {
+    "ca": "Cap obra no coincideix amb la cerca.",
+    "es": "Ninguna obra coincide con la búsqueda.",
+    "en": "No work matches the search."
+  },
+  "copies": {
+    "ca": "{free} / {copies} lliures",
+    "es": "{free} / {copies} libres",
+    "en": "{free} / {copies} free"
+  },
+  "edit": {
+    "ca": "Edita",
+    "es": "Edita",
+    "en": "Edit"
+  }
+}

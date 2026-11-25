@@ -1,0 +1,12 @@
+{
+  "toLight": {
+    "ca": "Canviar al tema clar",
+    "es": "Cambiar al tema claro",
+    "en": "Switch to the light theme"
+  },
+  "toDark": {
+    "ca": "Canviar al tema fosc",
+    "es": "Cambiar al tema oscuro",
+    "en": "Switch to the dark theme"
+  }
+}

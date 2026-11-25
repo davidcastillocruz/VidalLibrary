@@ -1,0 +1,150 @@
+/* The toasts of the style guide: bottom right, coming in from below in 320ms ease-out and leaving by the same side.
+   Over the page and its safe areas, never under the system bars of a phone */
+.region {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  z-index: 100;
+  width: min(380px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+/* It takes the focus only to keep it when a toast closes with it inside: nothing to press there */
+.region:focus {
+  outline: none;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 10px 12px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--overlay);
+  color: var(--text);
+  box-shadow: var(--shadow-3);
+  animation: enter var(--dur-toast) var(--ease-out);
+  /* The leaving fade: 160ms, the LEAVE_MS of Toasts.jsx */
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+/* One in another language than the page's: out of sight while its time runs */
+.toast[hidden] {
+  display: none;
+}
+
+.toast[data-leaving] {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+.icon svg {
+  stroke-width: 2.6;
+}
+
+.success .icon {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.error .icon {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.info .icon {
+  background: var(--info-soft);
+  color: var(--info);
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+  padding-top: 1px;
+}
+
+.title {
+  margin: 0 0 2px;
+  font: 650 14px/1.35 var(--font-ui);
+}
+
+.text {
+  margin: 0;
+  font: 400 13.5px/1.5 var(--font-ui);
+  color: var(--text);
+  text-wrap: pretty;
+}
+
+/* Under a title the line explains it, in the muted color of the guide */
+.title + .text {
+  color: var(--muted);
+}
+
+.close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin: -2px 0 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-hover) ease,
+    color var(--dur-hover) ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .close:hover {
+    background: var(--hover);
+    color: var(--text);
+  }
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation-name: fade;
+  }
+
+  .toast[data-leaving] {
+    transform: none;
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 0;
+    }
+  }
+}

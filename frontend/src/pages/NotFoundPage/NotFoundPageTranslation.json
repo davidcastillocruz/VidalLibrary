@@ -1,13 +1,13 @@
 {
   "pageTitle": {
-    "ca": "Pàgina no trobada",
-    "es": "Página no encontrada",
-    "en": "Page not found"
+    "ca": "Pàgina no trobada · Biblioteca Vidal i Barraquer",
+    "es": "Página no encontrada · Biblioteca Vidal i Barraquer",
+    "en": "Page not found · Vidal i Barraquer Library"
   },
   "title": {
-    "ca": "Aquesta pàgina no existeix",
-    "es": "Esta página no existe",
-    "en": "This page doesn't exist"
+    "ca": "Aquest volum no és al prestatge",
+    "es": "Este volumen no está en la estantería",
+    "en": "This volume isn't on the shelf"
   },
   "text": {
     "ca": "No hi ha res a {path}.",

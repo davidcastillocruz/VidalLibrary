@@ -1,0 +1,42 @@
+/* A soft light passing over the surface, left to right: steady motion, linear */
+.skeleton {
+  display: block;
+  border-radius: var(--radius-sm);
+  background:
+    linear-gradient(90deg, transparent 0%, var(--overlay) 50%, transparent 100%) 0 0 / 200% 100% no-repeat,
+    var(--surface);
+  animation: shine 1400ms linear infinite;
+}
+
+.line {
+  height: 12px;
+  width: 100%;
+}
+
+.title {
+  height: 22px;
+  width: 70%;
+}
+
+.cover {
+  aspect-ratio: 2 / 3;
+  width: 100%;
+  border-radius: 3px 6px 6px 3px;
+}
+
+@keyframes shine {
+  from {
+    background-position: 150% 0, 0 0;
+  }
+
+  to {
+    background-position: -50% 0, 0 0;
+  }
+}
+
+/* Without motion the shapes stay still: they still say something is coming */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}

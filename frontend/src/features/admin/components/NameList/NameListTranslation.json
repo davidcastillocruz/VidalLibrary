@@ -1,0 +1,62 @@
+{
+  "none": {
+    "ca": "Encara no n'hi ha cap.",
+    "es": "Aún no hay ninguno.",
+    "en": "None yet."
+  },
+  "newName": {
+    "ca": "Nom nou",
+    "es": "Nombre nuevo",
+    "en": "New name"
+  },
+  "save": {
+    "ca": "Desa",
+    "es": "Guarda",
+    "en": "Save"
+  },
+  "cancel": {
+    "ca": "Cancel·la",
+    "es": "Cancela",
+    "en": "Cancel"
+  },
+  "rename": {
+    "ca": "Canvia el nom de {name}",
+    "es": "Cambia el nombre de {name}",
+    "en": "Rename {name}"
+  },
+  "delete": {
+    "ca": "Elimina {name}",
+    "es": "Elimina {name}",
+    "en": "Delete {name}"
+  },
+  "add": {
+    "ca": "Afegeix a {list}",
+    "es": "Añade a {list}",
+    "en": "Add to {list}"
+  },
+  "placeholder": {
+    "ca": "Nom nou",
+    "es": "Nombre nuevo",
+    "en": "New name"
+  },
+  "addButton": {
+    "ca": "Afegeix",
+    "es": "Añade",
+    "en": "Add"
+  },
+  "createFailed": {
+    "ca": "No s'ha afegit",
+    "es": "No se ha añadido",
+    "en": "It wasn't added"
+  },
+  "renameFailed": {
+    "ca": "No s'ha canviat el nom",
+    "es": "No se ha cambiado el nombre",
+    "en": "It wasn't renamed"
+  },
+  "deleteFailed": {
+    "ca": "No s'ha eliminat",
+    "es": "No se ha eliminado",
+    "en": "It wasn't deleted"
+  }
+}

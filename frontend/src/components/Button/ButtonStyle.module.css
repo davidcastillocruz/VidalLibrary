@@ -1,0 +1,159 @@
+/* Measures of the style guide: 36px tall (42px large), 14px padding, 10px radius, 13.5px semibold text.
+   Pressing scales it to 0.97 in 140ms; hover only changes the color, and only with a mouse */
+.button {
+  font: 600 13.5px/1 var(--font-display);
+  letter-spacing: 0.01em;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  transition:
+    transform var(--dur-press) var(--ease-out),
+    background-color var(--dur-hover) ease,
+    border-color var(--dur-hover) ease,
+    color var(--dur-hover) ease;
+}
+
+.button:active:not([aria-disabled='true']) {
+  transform: scale(0.97);
+}
+
+.button[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* While it sends, it stays as clear as when it can be pressed: it only stops answering */
+.button[aria-busy='true'] {
+  opacity: 1;
+  cursor: progress;
+}
+
+.large {
+  height: 44px;
+  font-size: 14px;
+  padding: 0 20px;
+}
+
+.full {
+  width: 100%;
+}
+
+.primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: var(--shadow-btn);
+}
+
+.primary:active:not([aria-disabled='true']) {
+  background: var(--accent-press);
+}
+
+.secondary {
+  background: var(--raised);
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--text);
+}
+
+/* For what can't be undone easily (deleting the account): the red of the guide, faint until the pointer is over it */
+.danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 35%, transparent);
+}
+
+/* With the line of the links of index.css: faint, and drawn solid from the left under the pointer or the keyboard */
+.link {
+  height: auto;
+  padding: 0 0 2px;
+  border-radius: 0;
+  color: var(--link);
+  font-weight: 500;
+  background:
+    linear-gradient(currentColor 0 0) 0 100% / 0 1px no-repeat,
+    linear-gradient(color-mix(in srgb, currentColor 35%, transparent) 0 0) 0 100% / 100% 1px no-repeat;
+  transition:
+    transform var(--dur-press) var(--ease-out),
+    background-size 320ms var(--ease-out);
+}
+
+.link:focus-visible {
+  background-size: 100% 1px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .primary:hover:not([aria-disabled='true']) {
+    background: var(--accent-hover);
+  }
+
+  .secondary:hover:not([aria-disabled='true']) {
+    background: var(--overlay);
+  }
+
+  .ghost:hover:not([aria-disabled='true']) {
+    background: var(--hover);
+  }
+
+  .danger:hover:not([aria-disabled='true']) {
+    background: var(--danger);
+    color: var(--danger-ink);
+  }
+
+  .link:hover:not([aria-disabled='true']) {
+    background-size: 100% 1px;
+  }
+}
+
+/* The wheel: an arc over its faint track, one turn every 600ms.
+   It grows in when it appears, so the text making room for it doesn't jump. rotate and scale, and not transform,
+   so the two animations don't override each other */
+.spinner {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, currentColor 25%, transparent);
+  border-top-color: currentColor;
+  animation:
+    spin 600ms linear infinite,
+    appear 180ms var(--ease-out);
+}
+
+@keyframes spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    scale: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: spin 1600ms linear infinite;
+  }
+}
+
+/* On a touch screen every control is at least 44px tall: a finger isn't a pointer */
+@media (pointer: coarse) {
+  .button:not(.link) {
+    height: 44px;
+  }
+}

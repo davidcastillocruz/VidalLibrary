@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- A flap of the departures board with the envelope of the home page -->
-  <rect width="32" height="32" rx="7" fill="#1a1a18" />
-  <rect x="6" y="9" width="20" height="14" rx="1.5" fill="#f5c400" stroke="#151513" stroke-width="1.5" />
-  <path d="M6.5 10 16 17.5 25.5 10" fill="none" stroke="#151513" stroke-width="1.5" stroke-linejoin="round" />
-  <path d="M0 16h32" stroke="#000" stroke-opacity="0.55" />
+  <!-- Three spines on a shelf, the mark of the header, on the paper of the library -->
+  <rect width="32" height="32" rx="7" fill="#f4efe6"/>
+  <rect x="7" y="8" width="5" height="16" rx="1" fill="#1e5a48"/>
+  <rect x="13.5" y="5.5" width="5" height="18.5" rx="1" fill="#1e5a48"/>
+  <rect x="20" y="9.5" width="5" height="14.5" rx="1" fill="#1e5a48" transform="rotate(-12 22.5 16.75)"/>
+  <path d="M5 26h22" stroke="#211b16" stroke-width="1.6" stroke-linecap="round"/>
 </svg>
