@@ -1,12 +1,12 @@
-# FastAPI-React-Template
+# Vidal Library
 
-Full-stack base to clone and build on: FastAPI (async SQLAlchemy, Alembic, PostgreSQL, Redis rate limiting, email) and React + Vite, all in Docker. The only feature is a demo, `modules/demo/`: it is the reference for every new module, and it is removed when a real project starts ([`STARTING.md`](STARTING.md)).
+The library of the Vidal i Barraquer school: a public catalog of books, films and board games, loans for the students and teachers with an account, and the panel where the librarians run it. FastAPI and React, built from [FastAPI-React-Template](https://github.com/davidcastillocruz/FastAPI-React-Template), all in Docker.
 
-This file says how to work on the template and on anything built from it. The README has the setup and the guides for people.
+This file says how to work on the project. The README has the setup and the guides for people.
 
-<!-- A project built from the template changes the title and the paragraph above to its own, and writes here, under
-     "## This project", what is its own: its modules, its decisions and where its documentation lives. The rest of the
-     file is the way of working, kept as it is -->
+## This project
+
+- Languages: `ca` (the main one), `es` and `en`.
 
 ## Rule number one: don't invent style
 

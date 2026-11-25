@@ -28,10 +28,10 @@ def test_language_priority():
 def test_language_quality_and_fallbacks():
     assert get_language(request_with({"Accept-Language": "fr;q=1, en;q=0.5, es;q=0.9"})) == "es"
     # q=0 means "not acceptable": es is skipped although fr comes first and isn't available
-    assert get_language(request_with({"Accept-Language": "fr, es;q=0"})) == "en"
+    assert get_language(request_with({"Accept-Language": "fr, es;q=0"})) == "ca"
     # A regional tag falls back to its base language
-    assert get_language(request_with({"Accept-Language": "es-MX"})) == "es"
-    assert get_language(request_with({"Accept-Language": "*, fr, es;q=bad"})) == "en"
+    assert get_language(request_with({"Accept-Language": "es-ES"})) == "es"
+    assert get_language(request_with({"Accept-Language": "*, fr, es;q=bad"})) == "ca"
 
 
 def test_unsupported_query_and_cookie_fall_through_to_the_header():
@@ -43,9 +43,9 @@ def test_unsupported_query_and_cookie_fall_through_to_the_header():
 def test_language_header_with_spaces_and_wrong_qualities():
     assert get_language(request_with({"Accept-Language": "en; q=0.5, es ; q=0.9"})) == "es"
     assert get_language(request_with({"Accept-Language": "es;q=inf, en"})) == "en"
-    assert get_language(request_with({"Accept-Language": "es;q=nan, es;q=2"})) == "en"
-    assert get_language(request_with(), "fr") == "en"
-    assert get_language(request_with()) == "en"
+    assert get_language(request_with({"Accept-Language": "es;q=nan, es;q=2"})) == "ca"
+    assert get_language(request_with(), "fr") == "ca"
+    assert get_language(request_with()) == "ca"
 
 
 # --- setup_language_system: every broken file stops the startup ---
@@ -66,24 +66,25 @@ def translations(tmp_path, monkeypatch):
     languages.LANGUAGE_DATA = real
 
 
-def entry(en: object, es: object) -> dict[str, object]:
-    return {"en": en, "es": es}
+# One response in every available language: ca (the main one) and the same texts for es and en
+def entry(ca: object, others: object) -> dict[str, object]:
+    return {"ca": ca, "es": others, "en": others}
 
 
 def test_valid_file_loads(translations):
-    translations({"HELLO": entry({"detail": "Hi %s"}, {"detail": "Hola %s"})})
+    translations({"HELLO": entry({"detail": "Hola %s"}, {"detail": "Hi %s"})})
     setup_language_system()
 
-    assert get_response("HELLO", "es", {"detail": ("Ana",)}) == {"detail": "Hola Ana"}
+    assert get_response("HELLO", "ca", {"detail": ("Ana",)}) == {"detail": "Hola Ana"}
     assert get_error_detail("HELLO", "en") == "Hi %s"
 
 
 def test_extra_language_is_ignored(translations):
     # fr isn't in AVAILABLE_LANGUAGES: it isn't checked (a number would stop the startup) and isn't loaded
-    translations({"HELLO": {"en": {"detail": "Hi"}, "es": {"detail": "Hola"}, "fr": {"detail": 1}}})
+    translations({"HELLO": {**entry({"detail": "Hola"}, {"detail": "Hi"}), "fr": {"detail": 1}}})
     setup_language_system()
 
-    assert set(languages.LANGUAGE_DATA["HELLO"]) == {"en", "es"}
+    assert set(languages.LANGUAGE_DATA["HELLO"]) == {"ca", "es", "en"}
 
 
 VALID_ENTRY = json.dumps(entry({"detail": "x"}, {"detail": "x"}))
@@ -95,7 +96,7 @@ VALID_ENTRY = json.dumps(entry({"detail": "x"}, {"detail": "x"}))
     (None, f'{{"A": {VALID_ENTRY}, "A": {VALID_ENTRY}}}', ValueError, r"Repeated keys: \['A'\]"),
     ([], None, TypeError, r"Expected a dict in .+, got list"),
     ({"A": "text"}, None, TypeError, r"\[A\], got str"),
-    ({"A": {"en": {"detail": "x"}}}, None, ValueError, "missing languages"),
+    ({"A": {"ca": {"detail": "x"}}}, None, ValueError, "missing languages"),
     ({"A": entry({"detail": "x"}, "text")}, None, TypeError, r"\[A\]\[es\], got str"),
     ({"A": entry({"detail": 1}, {"detail": "x"})}, None, TypeError, "Expected a string"),
     ({"A": entry({"detail": "x"}, {"other": "x"})}, None, ValueError, "different texts"),
@@ -116,10 +117,10 @@ def test_broken_file_stops_startup(translations, data, raw, error, match):
 
 def test_file_with_a_bom_loads(translations):
     # Some editors save the files with a BOM at the start
-    translations(None, raw="\ufeff" + json.dumps({"HELLO": entry({"detail": "Hi"}, {"detail": "Hola"})}))
+    translations(None, raw="\ufeff" + json.dumps({"HELLO": entry({"detail": "Hola"}, {"detail": "Hi"})}))
     setup_language_system()
 
-    assert get_error_detail("HELLO", "es") == "Hola"
+    assert get_error_detail("HELLO", "ca") == "Hola"
 
 
 def test_same_name_in_two_files_stops_startup(translations):
@@ -138,7 +139,7 @@ def test_no_files_stops_startup(translations, tmp_path):
 
 
 def test_literal_percent_works_when_escaped(translations):
-    translations({"A": entry({"detail": "50%% off for %s"}, {"detail": "50%% para %s"})})
+    translations({"A": entry({"detail": "50%% para %s"}, {"detail": "50%% off for %s"})})
     setup_language_system()
 
     assert get_error_detail("A", "en", {"detail": ("Ana",)}) == "50% off for Ana"

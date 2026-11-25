@@ -1,45 +1,17 @@
 import logging
-import re
 
 from aiosmtplib import SMTPRecipientRefused, SMTPRecipientsRefused
 from fastapi_mail import FastMail, MessageType
 from fastapi_mail.errors import ConnectionErrors
 
 from src.core.logger import AppFormatter
-from src.mail import emails
-from src.mail.emails import build_demo_email
 from src.mail.sender import _mask_email, send_email
-
-
-def flaps(body: str) -> list[str]:
-    # Content of every flap of the board, in order
-    return re.findall(r'text-align:center;">(.*?)</td>', body)
 
 
 def test_mask_email():
     assert _mask_email("ana@test.dev") == "a***@test.dev"
     assert _mask_email("@test.dev") == "***@test.dev"
     assert _mask_email("not-an-email") == "***"
-
-
-def test_demo_email_in_each_language():
-    subject, body = build_demo_email("es")
-
-    assert subject == "Tu email de prueba"
-    assert '<html lang="es">' in body and "¡Funciona!" in body
-    assert flaps(body) == list("ENTREGADO")
-    assert build_demo_email("en")[0] == "Your test email"
-
-
-def test_demo_email_escapes_the_texts_once(monkeypatch):
-    texts = {"subject": "A & B", "title": "<b>", "text": "x", "board": "y", "status": "a&'", "footer": "z"}
-    monkeypatch.setattr(emails, "get_response", lambda name, language: texts)
-
-    subject, body = build_demo_email("en")
-
-    assert subject == "A & B"
-    assert "<b>" not in body and "&lt;b&gt;" in body
-    assert flaps(body) == ["A", "&amp;", "&#x27;"]
 
 
 async def test_send_email_sends_the_html_and_logs_masked_recipients(monkeypatch, caplog):

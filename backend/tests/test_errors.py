@@ -47,7 +47,7 @@ async def test_wrong_method_lists_every_allowed_method(client, item_routes):
     response = await client.delete("/test-items")
 
     assert response.status_code == 405
-    assert response.json() == {"detail": "This action isn't allowed here"}
+    assert response.json() == {"detail": "Aquesta acció no està permesa aquí"}
     # GET and POST are two functions on the same path, both are listed
     assert response.headers["allow"] == "GET, POST"
 
@@ -58,7 +58,7 @@ async def test_malformed_json(client, item_routes):
     )
 
     assert response.status_code == 422
-    assert response.json() == {"detail": "Check these fields: body"}
+    assert response.json() == {"detail": "Revisa aquests camps: body"}
 
 
 
@@ -67,7 +67,7 @@ async def test_a_body_over_the_limit_is_a_413(client, item_routes):
 
     response = await client.post("/test-items", content=body, headers={"Content-Type": "application/json"})
 
-    assert response.status_code == 413 and response.json() == {"detail": "What you sent is too big"}
+    assert response.status_code == 413 and response.json() == {"detail": "El que has enviat és massa gran"}
 
 
 # Without a Content-Length (sent in chunks) the bytes that arrive are counted

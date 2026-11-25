@@ -1,50 +1,68 @@
 {
     "TOO_MANY_REQUESTS": {
-        "en": {
-            "detail": "Too many requests, wait a moment and try again"
+        "ca": {
+            "detail": "Massa peticions, espera un moment i torna-ho a provar"
         },
         "es": {
             "detail": "Demasiadas peticiones, espera un momento y vuelve a intentarlo"
+        },
+        "en": {
+            "detail": "Too many requests, wait a moment and try again"
         }
     },
     "INTERNAL_SERVER_ERROR": {
-        "en": {
-            "detail": "Something went wrong on the server, try again later"
+        "ca": {
+            "detail": "Alguna cosa ha fallat al servidor, torna-ho a provar més tard"
         },
         "es": {
             "detail": "Algo ha fallado en el servidor, inténtalo más tarde"
+        },
+        "en": {
+            "detail": "Something went wrong on the server, try again later"
         }
     },
     "VALIDATION_ERROR": {
-        "en": {
-            "detail": "Check these fields: %s"
+        "ca": {
+            "detail": "Revisa aquests camps: %s"
         },
         "es": {
             "detail": "Revisa estos campos: %s"
+        },
+        "en": {
+            "detail": "Check these fields: %s"
         }
     },
     "NOT_FOUND": {
-        "en": {
-            "detail": "This page or resource doesn't exist"
+        "ca": {
+            "detail": "Aquesta pàgina o recurs no existeix"
         },
         "es": {
             "detail": "Esta página o recurso no existe"
+        },
+        "en": {
+            "detail": "This page or resource doesn't exist"
         }
     },
     "METHOD_NOT_ALLOWED": {
-        "en": {
-            "detail": "This action isn't allowed here"
+        "ca": {
+            "detail": "Aquesta acció no està permesa aquí"
         },
         "es": {
             "detail": "Esta acción no está permitida aquí"
+        },
+        "en": {
+            "detail": "This action isn't allowed here"
         }
     },
     "CONTENT_TOO_LARGE": {
-        "en": {
-            "detail": "What you sent is too big"
+        "ca": {
+            "detail": "El que has enviat és massa gran"
         },
         "es": {
             "detail": "Lo que has enviado es demasiado grande"
+        },
+        "en": {
+            "detail": "What you sent is too big"
         }
     }
 }

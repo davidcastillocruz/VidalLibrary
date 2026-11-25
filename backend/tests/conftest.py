@@ -5,8 +5,8 @@ import os
 os.environ["POSTGRES_DB"] = "app_test"
 os.environ["RATE_LIMIT_STORAGE_URI"] = "memory://"
 os.environ["APP_MODE"] = "development"
-os.environ["MAIN_LANGUAGE"] = "en"
-os.environ["AVAILABLE_LANGUAGES"] = "en,es"
+os.environ["MAIN_LANGUAGE"] = "ca"
+os.environ["AVAILABLE_LANGUAGES"] = "ca,es,en"
 os.environ["CORS_ORIGINS"] = "http://localhost:5173"
 
 import pytest
@@ -20,7 +20,6 @@ from src.core.settings import settings
 from src.database.base import Base
 from src.database.session import engine
 from src.main import app
-from src.modules.demo.services import email_request_service
 
 
 # The lifespan doesn't run with the test client, the languages are loaded here once
@@ -59,18 +58,6 @@ async def clean_state(database):
         async with engine.begin() as connection:
             await connection.execute(text(f"TRUNCATE {tables} RESTART IDENTITY CASCADE"))
     limiter.reset()
-
-
-# Emails are recorded instead of sent: (subject, recipients, body)
-@pytest.fixture(autouse=True)
-def sent_emails(monkeypatch) -> list[tuple]:
-    sent = []
-
-    async def fake_send_email(subject: str, recipients: list[str], body: str) -> None:
-        sent.append((subject, recipients, body))
-
-    monkeypatch.setattr(email_request_service, "send_email", fake_send_email)
-    return sent
 
 
 # Calls the app directly, without a server

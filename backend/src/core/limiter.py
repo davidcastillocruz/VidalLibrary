@@ -19,5 +19,3 @@ limiter = Limiter(
 # has to be stricter (the failures of a password, the emails to one address) gets its own limit, inside its service.
 # Reads that come with every page
 READ_LIMIT = "60/minute;2000/day"
-# What sends a real email: a few per minute, and a limit per day for what stays below it
-EMAIL_LIMIT = "5/minute;50/day"

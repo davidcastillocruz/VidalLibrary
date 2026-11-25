@@ -15,8 +15,6 @@ def api_routes() -> list[APIRoute]:
 
 # A day can't be waited for in a test: the limits of each route are read from its decorator
 @pytest.mark.parametrize("route, limits", [
-    ("demo_router.create_email_request", "5/minute;50/day"),
-    ("demo_router.get_email_requests", "60/minute;2000/day"),
 ])
 def test_each_route_has_its_limits(route, limits):
     found = [str(limit.limit) for limit in limiter._route_limits[f"src.api.routers.{route}"]]

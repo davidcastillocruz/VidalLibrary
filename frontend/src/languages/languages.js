@@ -1,8 +1,8 @@
 import { deleteCookie, getCookie } from '@/utils/cookies';
 
 // Same languages and cookie as the backend: the API answers in the language of the web
-export const LANGUAGES = ['en', 'es'];
-export const MAIN_LANGUAGE = 'en';
+export const LANGUAGES = ['ca', 'es', 'en'];
+export const MAIN_LANGUAGE = 'ca';
 export const LANGUAGE_COOKIE = 'language';
 
 // Language picked by the user, null if there's none. An invalid cookie ("language=fr") is deleted

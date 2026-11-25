@@ -1,22 +1,22 @@
 {
   "pageTitle": {
-    "en": "Not found · FastAPI & React",
-    "es": "No encontrada · FastAPI & React"
-  },
-  "status": {
-    "en": "Cancelled",
-    "es": "Cancelado"
+    "ca": "Pàgina no trobada",
+    "es": "Página no encontrada",
+    "en": "Page not found"
   },
   "title": {
-    "en": "This destination isn't on the board",
-    "es": "Este destino no está en el panel"
+    "ca": "Aquesta pàgina no existeix",
+    "es": "Esta página no existe",
+    "en": "This page doesn't exist"
   },
   "text": {
-    "en": "Nothing departs from {path}. Check the address or go back to the departures.",
-    "es": "No sale nada desde {path}. Revisa la dirección o vuelve a las salidas."
+    "ca": "No hi ha res a {path}.",
+    "es": "No hay nada en {path}.",
+    "en": "There's nothing at {path}."
   },
   "back": {
-    "en": "Back to departures",
-    "es": "Volver a las salidas"
+    "ca": "Torna a l'inici",
+    "es": "Vuelve al inicio",
+    "en": "Back to the start"
   }
 }

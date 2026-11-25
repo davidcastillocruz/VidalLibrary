@@ -22,7 +22,7 @@ jobs:
     # Every setting is required and there are no env files in the repository: the job gives them a value here.
     # Throwaway values for this machine only, the database runs in the service below
     env:
-      APP_TITLE: FastAPI-React-Template
+      APP_TITLE: Vidal Library
       APP_DESCRIPTION: CI
       APP_MODE: development
       POSTGRES_USER: postgres
@@ -34,8 +34,8 @@ jobs:
       DATABASE_MAX_OVERFLOW: 10
       RATE_LIMIT_STORAGE_URI: memory://
       CORS_ORIGINS: http://localhost:5173
-      MAIN_LANGUAGE: en
-      AVAILABLE_LANGUAGES: en,es
+      MAIN_LANGUAGE: ca
+      AVAILABLE_LANGUAGES: ca,es,en
       MAIL_USERNAME: ci@test.dev
       MAIL_PASSWORD: password
       MAIL_FROM: ci@test.dev

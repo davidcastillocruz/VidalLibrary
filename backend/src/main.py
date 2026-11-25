@@ -14,7 +14,6 @@ from starlette.types import ASGIApp, Message, Receive, Scope, Send
 # Registers every model before the first query, so relationships between models always resolve
 import src.database.models  # noqa: F401
 from src.api.dependencies import get_client_ip
-from src.api.routers.demo_router import router as demo_router
 from src.core import request_context
 from src.core.errors import error_response, setup_error_handlers, setup_openapi
 from src.core.languages import setup_language_system
@@ -63,7 +62,6 @@ app.state.limiter = limiter
 setup_error_handlers(app)
 setup_openapi(app)
 
-app.include_router(demo_router)
 
 
 # Refuses a body over MAX_BODY_BYTES with a 413, by the size it declares or by what has arrived while it's read.
